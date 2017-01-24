@@ -3,6 +3,8 @@
 
 Hamming hamming;
 int main(int argc, char *argv[]) {
-	int input[] = { -1, -1, -1 };
-	hamming.RunNetwork(input);
+	double input[] = { -1, -1, -1 };
+	hamming.Run(input);
+	std::cout << hamming.Run(input)[0]; std::cout << ":"; std::cout << hamming.Run(input)[1] << std::endl;
+	std::cin.ignore();
 }
