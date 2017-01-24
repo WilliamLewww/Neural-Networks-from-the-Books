@@ -1,14 +1,17 @@
 #include "hamming_network.h"
+#include <vector>
 #include <iostream>
 
-//a1 = purelin(W1p + b1)
-//a2(0) = a1
-//a2(t+1) = poslin(W2a2(t))
-int Hamming::RunNetwork(int input[], int length) {
-	for (int z = 0; z < length; z++) {
-		std::cout << input[z] << std::endl;
+int Hamming::RunNetwork(int input[]) {
+	int a[sizeof(weight) / sizeof(*weight)] = { 0, 0 };
+	for (int y = 0; y < (sizeof(weight) / sizeof(*weight)); y++) {
+		for (int x = 0; x < (sizeof(weight[0]) / sizeof(*weight[0])); x++) {
+			a[y] += input[x] * weight[y][x];
+		}
+		a[y] += bias[y];
+		std::cout << a[y] << std::endl;
 	}
-	std::cin.ignore();
+
 
 	return 0;
 }

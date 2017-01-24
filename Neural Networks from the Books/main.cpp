@@ -3,6 +3,6 @@
 
 Hamming hamming;
 int main(int argc, char *argv[]) {
-	int input[] = { -1, 1, -1 };
-	hamming.RunNetwork(input, 3);
+	int input[] = { -1, -1, -1 };
+	hamming.RunNetwork(input);
 }
