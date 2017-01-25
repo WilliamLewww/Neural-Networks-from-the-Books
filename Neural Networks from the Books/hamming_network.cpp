@@ -7,8 +7,10 @@ double* Hamming::Run(double input[]) {
 	a = FeedForward(input);
 	b[0] = a[0]; b[1] = a[1];
 
-	a = Recurrent(b);
-	b[0] = a[0]; b[1] = a[1];
+	while (b[0] > 0 && b[1] > 0) {
+		a = Recurrent(b);
+		b[0] = a[0]; b[1] = a[1];
+	}
 
 	return b;
 }

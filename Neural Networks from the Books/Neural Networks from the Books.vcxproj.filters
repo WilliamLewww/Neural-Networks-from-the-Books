@@ -21,9 +21,15 @@
     <ClCompile Include="hamming_network.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hopfield_network.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hamming_network.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hopfield_network.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

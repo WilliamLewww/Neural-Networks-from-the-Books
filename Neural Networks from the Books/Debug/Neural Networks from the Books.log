@@ -1,8 +1,6 @@
-﻿  main.cpp
-  hamming_network.cpp
-  Generating Code...
-g:\projects\neural networks from the books\neural networks from the books\hamming_network.cpp(26): warning C4172: returning address of local variable or temporary: net
-g:\projects\neural networks from the books\neural networks from the books\hamming_network.cpp(13): warning C4172: returning address of local variable or temporary: b
-g:\projects\neural networks from the books\neural networks from the books\hamming_network.cpp(38): warning C4172: returning address of local variable or temporary: net
+﻿  hopfield_network.cpp
+g:\projects\neural networks from the books\neural networks from the books\hopfield_network.cpp(39): warning C4172: returning address of local variable or temporary: net
+g:\projects\neural networks from the books\neural networks from the books\hopfield_network.cpp(13): warning C4172: returning address of local variable or temporary: b
+g:\projects\neural networks from the books\neural networks from the books\hopfield_network.cpp(26): warning C4172: returning address of local variable or temporary: net
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
