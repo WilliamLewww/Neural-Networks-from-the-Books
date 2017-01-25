@@ -18,18 +18,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hamming_network.cpp">
+    <ClCompile Include="hamming_network_ch3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hopfield_network.cpp">
+    <ClCompile Include="hopfield_network_ch3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="perceptron_network_ch3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hamming_network.h">
+    <ClInclude Include="hamming_network_ch3.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="hopfield_network.h">
+    <ClInclude Include="hopfield_network_ch3.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="perceptron_network_ch3.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -113,13 +113,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="hamming_network.cpp" />
-    <ClCompile Include="hopfield_network.cpp" />
+    <ClCompile Include="hamming_network_ch3.cpp" />
+    <ClCompile Include="hopfield_network_ch3.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="perceptron_network_ch3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hamming_network.h" />
-    <ClInclude Include="hopfield_network.h" />
+    <ClInclude Include="hamming_network_ch3.h" />
+    <ClInclude Include="hopfield_network_ch3.h" />
+    <ClInclude Include="perceptron_network_ch3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
