@@ -2,13 +2,22 @@
 
 double* Hopfield::Run(double input[]) {
 	double* a;
-	double b[3];
+	double b[3], c[3];
+	b[0] = input[0]; b[1] = input[1]; b[2] = input[2];
 
-	a = Recurrent(input);
-	b[0] = a[0]; b[1] = a[1]; b[2] = a[2];
+	bool sameResult = false;
 
-	a = satlins(b);
-	b[0] = a[0]; b[1] = a[1]; b[2] = a[2];
+	while (sameResult == false) {
+		a = Recurrent(b);
+		b[0] = a[0]; b[1] = a[1]; b[2] = a[2];
+
+		a = satlins(b);
+		b[0] = a[0]; b[1] = a[1]; b[2] = a[2];
+
+		if (b[0] == c[0] && b[1] == c[1] && b[2] == c[2]) { sameResult = true; }
+
+		c[0] = b[0]; c[1] = b[1]; c[2] = b[2];
+	}
 
 	return b;
 }
