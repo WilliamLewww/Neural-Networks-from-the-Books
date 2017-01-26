@@ -11,6 +11,9 @@ class PerceptronAND {
 	double weight[2] = {};
 
 	void InitializeWeight();
+	bool FeedForward(int index);
+	void LearningRule(int index, int value);
+	inline double hardlim(int value) { if (value >= 0) { return 1; } return 0; }
 public:
-	double Run();
+	double* Run();
 };

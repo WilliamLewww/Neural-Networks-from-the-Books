@@ -1,9 +1,41 @@
 #include "perceptron_learning_rule_ch4.h"
 
-double PerceptronAND::Run() {
+double* PerceptronAND::Run() {
 	InitializeWeight();
+	bool maxLearning = false;
 
-	return 0;
+	int iteration = 0;
+	while (maxLearning == false) {
+		maxLearning = FeedForward(iteration);
+
+		if (iteration == 3) { iteration = 0; }
+		else { iteration += 1; }
+	}
+
+	return weight;
+}
+
+bool PerceptronAND::FeedForward(int index) {
+	double net = 0;
+	for (int x = 0; x < 2; x++) {
+		net += weight[x] * input[index][x];
+	}
+	net = hardlim(net);
+
+	if (net == input[index][2]) { return true; }
+
+	LearningRule(index, net);
+	return false;
+}
+
+void PerceptronAND::LearningRule(int index, int value) {
+	if (input[index][2] == 1 && value == 0) {
+		for (int x = 0; x < 2; x++) { weight[x] += input[index][x]; }
+	}
+
+	if (input[index][2] == 0 && value == 1) {
+		for (int x = 0; x < 2; x++) { weight[x] -= input[index][x]; }
+	}
 }
 
 void PerceptronAND::InitializeWeight() {
