@@ -3,12 +3,11 @@
 #include <iostream>
 
 class PerceptronAND {
-	double input[4][3] = { { 0, 0, 0 },
-	{ 0, 1, 0 },
-	{ 1, 0, 0 },
-	{ 1, 1, 1 } };
+	double input[3][3] = {{  1,  2, 1 },
+						  { -1,  2, 0 },
+	                      {  0, -1, 0 }};
 
-	double weight[2] = {};
+	double weight[2] = {1.0, -0.8};
 
 	void InitializeWeight();
 	bool FeedForward(int index);

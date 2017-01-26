@@ -23,7 +23,7 @@
 
 PerceptronAND perceptron;
 int main(int argc, char *argv[]) {
-	std::cout << perceptron.Run() << std::endl;
+	perceptron.Run();
 
 	std::cin.ignore();
 }

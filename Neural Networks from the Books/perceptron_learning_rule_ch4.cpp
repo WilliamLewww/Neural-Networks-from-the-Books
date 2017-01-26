@@ -1,16 +1,11 @@
 #include "perceptron_learning_rule_ch4.h"
 
 double* PerceptronAND::Run() {
-	InitializeWeight();
-	bool maxLearning = false;
+	//InitializeWeight();
+	bool maxLearning = false, cycle = false;
 
-	int iteration = 0;
-	while (maxLearning == false) {
-		maxLearning = FeedForward(iteration);
-
-		if (iteration == 3) { iteration = 0; }
-		else { iteration += 1; }
-	}
+	FeedForward(0);
+	std::cout << weight[0] << ":" << weight[1] << std::endl;
 
 	return weight;
 }

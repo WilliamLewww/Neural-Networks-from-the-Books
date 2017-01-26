@@ -1,5 +1,5 @@
 ﻿  perceptron_learning_rule_ch4.cpp
-g:\projects\neural networks from the books\neural networks from the books\perceptron_learning_rule_ch4.cpp(23): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-g:\projects\neural networks from the books\neural networks from the books\perceptron_learning_rule_ch4.cpp(27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+g:\projects\neural networks from the books\neural networks from the books\perceptron_learning_rule_ch4.cpp(18): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+g:\projects\neural networks from the books\neural networks from the books\perceptron_learning_rule_ch4.cpp(22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
