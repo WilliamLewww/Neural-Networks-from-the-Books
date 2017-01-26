@@ -116,11 +116,13 @@
     <ClCompile Include="hamming_network_ch3.cpp" />
     <ClCompile Include="hopfield_network_ch3.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="perceptron_learning_rule_ch4.cpp" />
     <ClCompile Include="perceptron_network_ch3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hamming_network_ch3.h" />
     <ClInclude Include="hopfield_network_ch3.h" />
+    <ClInclude Include="perceptron_learning_rule_ch4.h" />
     <ClInclude Include="perceptron_network_ch3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

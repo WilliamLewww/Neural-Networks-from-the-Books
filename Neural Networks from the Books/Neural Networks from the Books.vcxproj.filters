@@ -13,30 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Chapter 3">
+      <UniqueIdentifier>{50118c43-12a6-423b-b2e3-5553812d7cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Chapter 3">
+      <UniqueIdentifier>{f436f115-2179-4710-96a3-175efdb88cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Chapter 4">
+      <UniqueIdentifier>{2caa1ed1-340f-4095-9173-1604d9ea590e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Chapter 4">
+      <UniqueIdentifier>{a6fd0c9b-f9b0-4535-ad7f-710586831348}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hamming_network_ch3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="perceptron_network_ch3.cpp">
+      <Filter>Source Files\Chapter 3</Filter>
     </ClCompile>
     <ClCompile Include="hopfield_network_ch3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Chapter 3</Filter>
     </ClCompile>
-    <ClCompile Include="perceptron_network_ch3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="hamming_network_ch3.cpp">
+      <Filter>Source Files\Chapter 3</Filter>
+    </ClCompile>
+    <ClCompile Include="perceptron_learning_rule_ch4.cpp">
+      <Filter>Source Files\Chapter 4</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="perceptron_network_ch3.h">
+      <Filter>Resource Files\Chapter 3</Filter>
+    </ClInclude>
     <ClInclude Include="hamming_network_ch3.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Chapter 3</Filter>
     </ClInclude>
     <ClInclude Include="hopfield_network_ch3.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Chapter 3</Filter>
     </ClInclude>
-    <ClInclude Include="perceptron_network_ch3.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="perceptron_learning_rule_ch4.h">
+      <Filter>Resource Files\Chapter 4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
