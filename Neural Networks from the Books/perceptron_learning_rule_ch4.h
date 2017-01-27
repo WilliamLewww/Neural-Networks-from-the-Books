@@ -13,11 +13,12 @@ class PerceptronLR {
 
 	double bias;
 
-	void InitializeWeight();
+	void InitializeWeightBias();
 	bool FeedForward(int index);
 	void LearningRule(int index, int value);
 	int hardlim(double value);
 public:
 	void InitializeInput(std::vector<std::vector<double>> inputParam);
 	double* Run();
+	double Calculate(double inputParam[], int length);
 };
