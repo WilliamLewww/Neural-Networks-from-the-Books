@@ -6,11 +6,11 @@ double* PerceptronLR::Run() {
 	InitializeWeight();
 	bool maxLearning = false;
 
-	std::cout << sizeof(input[0]) / (sizeof(*input[0])) << std::endl;
+	//std::cout << sizeof(input[0]) / (sizeof(*input[0])) << std::endl;
 
 	int iteration = 0, cycleCount = 0;
 	while (maxLearning == false) {
-		std::cout << weight[0] << ":" << weight[1] << std::endl;
+		//std::cout << weight[0] << ":" << weight[1] << std::endl;
 		if (FeedForward(iteration)) { cycleCount += 1; }
 		else { cycleCount = 0; }
 
@@ -55,4 +55,19 @@ void PerceptronLR::InitializeWeight() {
 	for (int x = 0; x < 100; x++) {
 		weight[x] = (double)(rand() % 21 - 10) / 10;
 	}
+}
+
+void PerceptronLR::InitializeInput(std::vector<std::vector<double>> inputParam) {
+	for (int x = 0; x < inputParam[0].size(); x++) {
+		for (int y = 0; y < inputParam.size(); y++) {
+			input[y][x] = inputParam[y][x];
+		}
+	}
+
+	/*for (int y = 0; y < inputParam.size(); y++) {
+		for (int x = 0; x < inputParam[0].size(); x++) {
+			std::cout << input[y][x] << ',';
+		}
+		std::cout << std::endl;
+	}*/
 }

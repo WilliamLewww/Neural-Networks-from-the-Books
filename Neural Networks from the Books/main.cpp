@@ -23,6 +23,9 @@
 
 PerceptronLR perceptron;
 int main(int argc, char *argv[]) {
+	std::vector<std::vector<double>> inputAND = {{ 1, 1, 0 }, { 2, 1, 0 }, { 1, 2, 0 }, { 2, 2, 1 }};
+	std::vector<std::vector<double>> inputOR = {{ 1, 1, 0 },{ 2, 1, 1 },{ 1, 2, 1 },{ 2, 2, 1 }};
+	perceptron.InitializeInput(inputAND);
 	perceptron.Run();
 
 	std::cin.ignore();

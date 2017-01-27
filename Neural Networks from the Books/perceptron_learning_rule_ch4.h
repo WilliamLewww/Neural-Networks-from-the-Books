@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 #include <iostream>
+#include <vector>
 #include <time.h>
 
 class PerceptronLR {
@@ -15,5 +16,6 @@ class PerceptronLR {
 	void LearningRule(int index, int value);
 	int hardlim(double value);
 public:
+	void InitializeInput(std::vector<std::vector<double>> inputParam);
 	double* Run();
 };
