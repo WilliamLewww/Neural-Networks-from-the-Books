@@ -39,8 +39,8 @@ int main(int argc, char *argv[]) {
 	perceptron.InitializeInput(inputAND);
 	perceptron.Run();
 
-	/*double testInput[2] = {1, 1};
-	std::cout << perceptron.Calculate(testInput, 2) << std::endl;*/
+	double testInput[2] = {1, 1};
+	std::cout << perceptron.Calculate(testInput, 2) << std::endl;
 
 	std::cin.ignore();
 }
