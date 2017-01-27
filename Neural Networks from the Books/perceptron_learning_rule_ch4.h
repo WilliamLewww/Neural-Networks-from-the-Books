@@ -11,6 +11,8 @@ class PerceptronLR {
 
 	double weight[2] = { 1.0, -0.8 };
 
+	double bias;
+
 	void InitializeWeight();
 	bool FeedForward(int index);
 	void LearningRule(int index, int value);

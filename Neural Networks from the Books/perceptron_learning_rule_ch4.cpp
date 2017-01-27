@@ -10,7 +10,7 @@ double* PerceptronLR::Run() {
 
 	int iteration = 0, cycleCount = 0;
 	while (maxLearning == false) {
-		//std::cout << weight[0] << ":" << weight[1] << std::endl;
+		std::cout << weight[0] << ":" << weight[1] << "||" << bias << std::endl;
 		if (FeedForward(iteration)) { cycleCount += 1; }
 		else { cycleCount = 0; }
 
@@ -28,6 +28,7 @@ bool PerceptronLR::FeedForward(int index) {
 	for (int x = 0; x < sizeof(input[0]) / (sizeof(*input[0])) - 1; x++) {
 		net += weight[x] * input[index][x];
 	}
+	net += bias;
 	net = hardlim(net);
 
 	if (net == input[index][sizeof(input[0]) / (sizeof(*input[0])) - 1]) { return true; }
@@ -39,10 +40,12 @@ bool PerceptronLR::FeedForward(int index) {
 void PerceptronLR::LearningRule(int index, int value) {
 	if (input[index][sizeof(input[0]) / (sizeof(*input[0])) - 1] == 1 && value == 0) {
 		for (int x = 0; x < sizeof(input[0]) / (sizeof(*input[0])) - 1; x++) { weight[x] += input[index][x]; }
+		bias += value;
 	}
 
 	if (input[index][sizeof(input[0]) / (sizeof(*input[0])) - 1] == 0 && value == 1) {
 		for (int x = 0; x < sizeof(input[0]) / (sizeof(*input[0])) - 1; x++) { weight[x] -= input[index][x]; }
+		bias -= value;
 	}
 }
 
