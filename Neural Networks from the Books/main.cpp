@@ -21,7 +21,7 @@
 //	std::cin.ignore();
 //}
 
-PerceptronAND perceptron;
+PerceptronLR perceptron;
 int main(int argc, char *argv[]) {
 	perceptron.Run();
 
