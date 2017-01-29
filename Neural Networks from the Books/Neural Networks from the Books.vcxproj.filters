@@ -25,6 +25,12 @@
     <Filter Include="Resource Files\Chapter 4">
       <UniqueIdentifier>{a6fd0c9b-f9b0-4535-ad7f-710586831348}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Online Research">
+      <UniqueIdentifier>{e5769d06-0746-4567-9a2c-d8a0fbbe86d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Online Research">
+      <UniqueIdentifier>{52a35f95-1354-4561-bf42-8821f6bf92b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +48,9 @@
     <ClCompile Include="perceptron_learning_rule_ch4.cpp">
       <Filter>Source Files\Chapter 4</Filter>
     </ClCompile>
+    <ClCompile Include="multilayer_perceptron.cpp">
+      <Filter>Source Files\Online Research</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="perceptron_network_ch3.h">
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="perceptron_learning_rule_ch4.h">
       <Filter>Resource Files\Chapter 4</Filter>
+    </ClInclude>
+    <ClInclude Include="multilayer_perceptron.h">
+      <Filter>Resource Files\Online Research</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
