@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <math.h>
 
+#define PI 3.14159265
 const double e = 2.71828182845904523536;
 
 class PerceptronML {
@@ -15,8 +17,15 @@ class PerceptronML {
 	std::vector<std::vector<double>> w2 = {{ 0.09, -0.17 }};
 	std::vector<double> b2 = { 0.48 };
 
+	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
+	std::vector<std::vector<double>> Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input);
+
+
 	double Activation(int function, double value);
+	double DActivation(int function, double value);
+
+	double OriginalFunction(double value);
 public:
 	void Run();
 };		
