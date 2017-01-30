@@ -1,7 +1,7 @@
 #include "multilayer_perceptron_ch11.h"
 
 void PerceptronML::Run() {
-	FeedForward(a0, w1, b1, 0);
+	FeedForward(a0, w1, b1, 1);
 }
 
 std::vector<std::vector<double>> PerceptronML::FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function) {
@@ -26,13 +26,12 @@ std::vector<std::vector<double>> PerceptronML::FeedForward(std::vector<std::vect
 double PerceptronML::Activation(int function, double value) {
 	switch (function) {
 	case 0:
-		return logsig(value);
-		break;
+		//Linear
+		return value;
+	case 1:
+		//Log-Sigmoid
+		return 1 / (1 + std::pow(e, -value));
 	default:
 		break;
 	}
-}
-
-double PerceptronML::logsig(double value) {
-	return 1 / (1 + std::pow(e, -value));
 }

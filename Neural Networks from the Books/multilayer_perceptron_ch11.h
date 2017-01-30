@@ -17,7 +17,6 @@ class PerceptronML {
 
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
 	double Activation(int function, double value);
-	double logsig(double value);
 public:
 	void Run();
 };		
