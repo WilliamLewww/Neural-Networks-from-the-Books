@@ -10,17 +10,20 @@ void PerceptronML::Run() {
 	Backpropagation(error, a);
 }
 
-std::vector<std::vector<double>> PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
+void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
 	std::vector<double> s2 = { -2 * (DActivation(0, input[1][0][0])) * error };
-
 	std::vector<std::vector<double>> f1 = { { DActivation(1, input[0][0][0]), 0 }, { 0, DActivation(1, input[0][1][0]) } };
 	std::vector<std::vector<double>> w2new = { { s2[0] * w2[0][0]}, { s2[0] * w2[0][1] } };
 	std::vector<std::vector<double>> s1 = FeedForward(w2new, f1);
 
-	std::cout << s1[0][0] << ":" << s1[1][0] << std::endl;
+	w2[0][0] = w2[0][0] - (0.1 * s2[0] * input[0][0][0]);
+	w2[0][1] = w2[0][1] - (0.1 * s2[0] * input[0][1][0]);
+	b2[0] = b2[0] - (0.1 * s2[0]);
 
-	std::vector<std::vector<double>> exit;
-	return exit;
+	w1[0][0] = w1[0][0] - (0.1 * s1[0][0] * a0[0][0]);
+	w1[1][0] = w1[1][0] - (0.1 * s1[1][0] * a0[0][0]);
+	b1[0] = b1[0] - (0.1 * s1[0][0]);
+	b1[1] = b1[1] - (0.1 * s1[1][0]);
 }
 
 std::vector<std::vector<double>> PerceptronML::FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight) {

@@ -19,7 +19,8 @@ class PerceptronML {
 
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
-	std::vector<std::vector<double>> Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input);
+
+	void Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input);
 
 
 	double Activation(int function, double value);
