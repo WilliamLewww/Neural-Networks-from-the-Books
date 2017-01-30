@@ -1,20 +1,34 @@
 #include "multilayer_perceptron_ch11.h"
 
+void PerceptronML::Initialize() {
+	a0 = { { 1 } };
+
+	w1 = { { -0.27 },
+	{ -0.41 } };
+
+	b1 = { -0.48, -0.13 };
+	w2 = { { 0.09, -0.17 } };
+	b2 = { 0.48 };
+
+	error = 1;
+}
+
 void PerceptronML::Run() {
 	std::vector<std::vector<double>> a1 = FeedForward(a0, w1, b1, 1);
 	std::vector<std::vector<double>> a2 = FeedForward(a1, w2, b2, 0);
 	std::vector<std::vector<std::vector<double>>> a = { a1, a2 };
 
-	double error = OriginalFunction(1) - a2[0][0];
-
+	error = OriginalFunction(1) - a2[0][0];
 	Backpropagation(error, a);
+
+	std::cout << floor(error * 10000 + 0.5) / 10000 << std::endl;
 }
 
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
 	std::vector<double> s2 = { -2 * (DActivation(0, input[1][0][0])) * error };
 	std::vector<std::vector<double>> f1 = { { DActivation(1, input[0][0][0]), 0 }, { 0, DActivation(1, input[0][1][0]) } };
 	std::vector<std::vector<double>> w2new = { { s2[0] * w2[0][0]}, { s2[0] * w2[0][1] } };
-	std::vector<std::vector<double>> s1 = FeedForward(w2new, f1);
+	std::vector<std::vector<double>> s1 = MultMatrix(w2new, f1);
 
 	w2[0][0] = w2[0][0] - (0.1 * s2[0] * input[0][0][0]);
 	w2[0][1] = w2[0][1] - (0.1 * s2[0] * input[0][1][0]);
@@ -26,15 +40,15 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	b1[1] = b1[1] - (0.1 * s1[1][0]);
 }
 
-std::vector<std::vector<double>> PerceptronML::FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight) {
+std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> matA, std::vector<std::vector<double>> matB) {
 	std::vector<std::vector<double>> product;
 	std::vector<double> row;
 
 	double total = 0;;
-	for (int y = 0; y < weight.size(); y++) {
-		for (int x = 0; x < input[0].size(); x++) {
-			for (int inner = 0; inner < weight[0].size(); inner++) {
-				total += weight[y][inner] * input[inner][x];
+	for (int y = 0; y < matB.size(); y++) {
+		for (int x = 0; x < matA[0].size(); x++) {
+			for (int inner = 0; inner < matB[0].size(); inner++) {
+				total += matB[y][inner] * matA[inner][x];
 			}
 			row.push_back(total);
 			total = 0;

@@ -49,7 +49,10 @@
 ///CHAPTER 11 
 PerceptronML perceptron;
 int main(int argc, char *argv[]) {
-	perceptron.Run();
+	perceptron.Initialize();
+	while (perceptron.error != 0) {
+		perceptron.Run();
+	}
 
 	std::cin.ignore();
 }

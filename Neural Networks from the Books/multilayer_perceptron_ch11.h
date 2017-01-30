@@ -7,26 +7,24 @@
 const double e = 2.71828182845904523536;
 
 class PerceptronML {
-	std::vector<std::vector<double>> a0 = {{1}};
+	std::vector<std::vector<double>> a0;
+	std::vector<std::vector<double>> w1;
+	std::vector<double> b1;
+	std::vector<std::vector<double>> w2;
+	std::vector<double> b2;
 
-	std::vector<std::vector<double>> w1 = { { -0.27 },
-											{ -0.41 }};
-
-	std::vector<double> b1 = { -0.48, -0.13 };
-
-	std::vector<std::vector<double>> w2 = {{ 0.09, -0.17 }};
-	std::vector<double> b2 = { 0.48 };
-
-	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
+	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
 
 	void Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input);
-
 
 	double Activation(int function, double value);
 	double DActivation(int function, double value);
 
 	double OriginalFunction(double value);
 public:
+	double error;
+
 	void Run();
-};		
+	void Initialize();
+};
