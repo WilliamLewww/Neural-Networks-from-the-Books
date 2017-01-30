@@ -1,3 +1,10 @@
-﻿  main.cpp
+﻿  multilayer_perceptron_ch11.h.cpp
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(12): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(13): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(14): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(34): warning C4715: 'PerceptronML::Activation': not all control paths return a value
+  Skipping... (no relevant changes detected)
+  main.cpp
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
