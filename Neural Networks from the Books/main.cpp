@@ -49,8 +49,13 @@
 ///CHAPTER 11 
 PerceptronML perceptron;
 int main(int argc, char *argv[]) {
-	perceptron.Initialize();
-	while (perceptron.error != 0) {
+	perceptron.Initialize(0);
+	while (perceptron.error > 0.001 || perceptron.error < -0.001) {
+		perceptron.Run();
+	}
+
+	perceptron.FeedInput(1);
+	while (perceptron.error > 0.001 || perceptron.error < -0.001) {
 		perceptron.Run();
 	}
 

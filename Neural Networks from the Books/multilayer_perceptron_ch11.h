@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include <time.h>
 
 #define PI 3.14159265
 const double e = 2.71828182845904523536;
@@ -22,9 +23,12 @@ class PerceptronML {
 	double DActivation(int function, double value);
 
 	double OriginalFunction(double value);
+
+	void InitializeWeightBias();
 public:
 	double error;
 
 	void Run();
-	void Initialize();
+	void FeedInput(double input);
+	void Initialize(double input);
 };

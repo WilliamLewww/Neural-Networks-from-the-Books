@@ -1,14 +1,37 @@
 #include "multilayer_perceptron_ch11.h"
 
-void PerceptronML::Initialize() {
-	a0 = { { 1 } };
+void PerceptronML::InitializeWeightBias() {
+	for (int x = 0; x < 2; x++) {
+		w1[x][0] = (double)(rand() % 210 - 100) / 100;
+	}
 
-	w1 = { { -0.27 },
-	{ -0.41 } };
+	for (int x = 0; x < 2; x++) {
+		b1[x] = (double)(rand() % 210 - 100) / 100;
+	}
 
+	for (int x = 0; x < 2; x++) {
+		w2[0][x] = (double)(rand() % 210 - 100) / 100;
+	}
+
+	b2[0] = (double)(rand() % 210 - 100) / 100;
+}
+
+void PerceptronML::FeedInput(double input) {
+	a0 = { { input } };
+
+	error = 1;
+}
+
+void PerceptronML::Initialize(double input) {
+	srand(time(0));
+
+	a0 = { { input } };
+	w1 = { { -0.27 }, { -0.41 } };
 	b1 = { -0.48, -0.13 };
 	w2 = { { 0.09, -0.17 } };
 	b2 = { 0.48 };
+
+	InitializeWeightBias();
 
 	error = 1;
 }
@@ -18,10 +41,11 @@ void PerceptronML::Run() {
 	std::vector<std::vector<double>> a2 = FeedForward(a1, w2, b2, 0);
 	std::vector<std::vector<std::vector<double>>> a = { a1, a2 };
 
-	error = OriginalFunction(1) - a2[0][0];
+	error = OriginalFunction(a0[0][0]) - a2[0][0];
 	Backpropagation(error, a);
 
-	std::cout << floor(error * 10000 + 0.5) / 10000 << std::endl;
+	//std::cout << floor(error * 10000 + 0.5) / 10000 << std::endl;
+	std::cout << error << std::endl;
 }
 
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
