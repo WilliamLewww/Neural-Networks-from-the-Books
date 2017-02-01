@@ -12,10 +12,6 @@ class PerceptronML {
 	std::vector<std::vector<double>> b;
 
 	std::vector<std::vector<double>> a0;
-	std::vector<std::vector<double>> w1;
-	std::vector<double> b1;
-	std::vector<std::vector<double>> w2;
-	std::vector<double> b2;
 
 	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
@@ -26,8 +22,6 @@ class PerceptronML {
 	double DActivation(int function, double value);
 
 	double OriginalFunction(double value);
-
-	void InitializeWeightBias();
 public:
 	double error;
 
@@ -37,5 +31,5 @@ public:
 	void FeedInput(double input);
 	void Initialize(double input);
 
-	void GenerateWeightBias(int input, int output, int biasCount);
+	void GenerateWeightBias(int input, int output);
 };

@@ -1,24 +1,6 @@
 #include "multilayer_perceptron_ch11.h"
 
-void PerceptronML::InitializeWeightBias() {
-	for (int x = 0; x < w1.size(); x++) {
-		w1[x][0] = (double)(rand() % 210 - 100) / 100;
-	}
-
-	for (int x = 0; x < w2[0].size(); x++) {
-		w2[0][x] = (double)(rand() % 210 - 100) / 100;
-	}
-
-	for (int x = 0; x < b1.size(); x++) {
-		b1[x] = (double)(rand() % 210 - 100) / 100;
-	}
-
-	for (int x = 0; x < b2.size(); x++) {
-		b2[x] = (double)(rand() % 210 - 100) / 100;
-	}
-}
-
-void PerceptronML::GenerateWeightBias(int input, int output, int biasCount) {
+void PerceptronML::GenerateWeightBias(int input, int output) {
 	std::vector<std::vector<double>> tempWeight;
 	std::vector<double> row;
 	for (int y = 0; y < output; y++) {
@@ -30,7 +12,7 @@ void PerceptronML::GenerateWeightBias(int input, int output, int biasCount) {
 	}
 
 	std::vector<double> tempBias;
-	for (int x = 0; x < biasCount; x++) {
+	for (int x = 0; x < output; x++) {
 		tempBias.push_back((double)(rand() % 210 - 100) / 100);
 	}
 
@@ -47,12 +29,8 @@ void PerceptronML::Initialize(double input) {
 	srand(time(0));
 
 	a0 = { { input } };
-	w1 = { { -0.27 }, { -0.41 } };
-	b1 = { -0.48, -0.13 };
-	w2 = { { 0.09, -0.17 } };
-	b2 = { 0.48 };
-
-	InitializeWeightBias();
+	GenerateWeightBias(1, 2);
+	GenerateWeightBias(2, 1);
 
 	error = 1;
 }
