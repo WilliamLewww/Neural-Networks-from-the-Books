@@ -49,14 +49,16 @@
 ///CHAPTER 11 
 PerceptronML perceptron;
 int main(int argc, char *argv[]) {
+	double input;
 	perceptron.Initialize(0);
-	while (perceptron.error > 0.001 || perceptron.error < -0.001) {
-		perceptron.Run();
-	}
 
-	perceptron.FeedInput(1);
-	while (perceptron.error > 0.001 || perceptron.error < -0.001) {
-		perceptron.Run();
+	while (true) {
+		std::cin >> input;
+
+		perceptron.FeedInput(input);
+		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
+			perceptron.Run();
+		}
 	}
 
 	std::cin.ignore();

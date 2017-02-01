@@ -8,6 +8,9 @@
 const double e = 2.71828182845904523536;
 
 class PerceptronML {
+	std::vector<std::vector<std::vector<double>>> w;
+	std::vector<std::vector<double>> b;
+
 	std::vector<std::vector<double>> a0;
 	std::vector<std::vector<double>> w1;
 	std::vector<double> b1;
@@ -29,6 +32,10 @@ public:
 	double error;
 
 	void Run();
+	double Calculate(double input);
+
 	void FeedInput(double input);
 	void Initialize(double input);
+
+	void GenerateWeightBias(int input, int output, int biasCount);
 };
