@@ -75,7 +75,21 @@ void PerceptronML::Run() {
 }
 
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
-	std::vector<double> s2 = { -2 * (DActivation(0, input[1][0][0])) * error };
+	std::vector<std::vector<double>> s;
+	std::vector<double> row;
+
+	//s3 = (-2)F3(n3)(e)
+	//s2 = F2(n2)(w3)(s3)
+	//s1 = F1(n1)(w2)(s2)
+
+	//w3 = w3 - L(s3)(a2)
+	//b3 = b3 - L(s3)
+	//w2 = w2 - L(s2)(a1)
+	//b2 = b2 - L(s2)
+	//w1 = w1 - L(s1)(a0)
+	//b1 = b1 - L(s1)
+
+	/*std::vector<double> s2 = { -2 * (DActivation(0, input[1][0][0])) * error };
 	std::vector<std::vector<double>> f1 = { { DActivation(1, input[0][0][0]), 0 }, { 0, DActivation(1, input[0][1][0]) } };
 	std::vector<std::vector<double>> w2new = { { s2[0] * w2[0][0]}, { s2[0] * w2[0][1] } };
 	std::vector<std::vector<double>> s1 = MultMatrix(w2new, f1);
@@ -87,7 +101,27 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	w1[0][0] = w1[0][0] - (0.1 * s1[0][0] * a0[0][0]);
 	w1[1][0] = w1[1][0] - (0.1 * s1[1][0] * a0[0][0]);
 	b1[0] = b1[0] - (0.1 * s1[0][0]);
-	b1[1] = b1[1] - (0.1 * s1[1][0]);
+	b1[1] = b1[1] - (0.1 * s1[1][0]);*/
+}
+
+std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<double> input, int function) {
+	std::vector<std::vector<double>> output;
+	std::vector<double> row;
+
+	for (int x = 0; x < input.size(); x++) {
+		for (int y = 0; y < input.size(); y++) {
+			if (y == x) {
+				row.push_back(DActivation(function, input[x]));
+			}
+			else {
+				row.push_back(0.0);
+			}
+		}
+
+		output.push_back(row);
+	}
+
+	return output;
 }
 
 std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> matA, std::vector<std::vector<double>> matB) {

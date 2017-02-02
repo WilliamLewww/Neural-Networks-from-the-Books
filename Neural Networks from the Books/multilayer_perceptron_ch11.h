@@ -13,6 +13,7 @@ class PerceptronML {
 
 	std::vector<std::vector<double>> a0;
 
+	std::vector<std::vector<double>> GenMatrix(std::vector<double> input, int function);
 	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
 
