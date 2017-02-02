@@ -8,13 +8,15 @@
 const double e = 2.71828182845904523536;
 
 class PerceptronML {
+	double learningRate = 0.1;
+
 	std::vector<std::vector<std::vector<double>>> w;
 	std::vector<std::vector<double>> b;
 
 	std::vector<std::vector<double>> a0;
 
-	std::vector<std::vector<double>> GenMatrix(std::vector<double> input, int function);
-	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight);
+	std::vector<std::vector<double>> GenMatrix(std::vector<std::vector<double>> input, int function);
+	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> matB, std::vector<std::vector<double>> matA);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
 
 	void Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input);

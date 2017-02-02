@@ -56,6 +56,8 @@ double PerceptronML::Calculate(double input) {
 
 void PerceptronML::Run() {
 	std::vector<std::vector<std::vector<double>>> a;
+	a.push_back(a0);
+
 	std::vector<std::vector<double>> tempA;
 	for (int x = 0; x < w.size(); x++) {
 		if (x == 0) {
@@ -75,8 +77,26 @@ void PerceptronML::Run() {
 }
 
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
-	std::vector<std::vector<double>> s;
-	std::vector<double> row;
+	std::vector<std::vector<std::vector<double>>> s;
+	std::vector<std::vector<double>> initial;
+
+	for (int x = input.size() - 1; x >= 0; x--) {
+		if (x == input.size() - 1) {
+			initial = { { -2 * DActivation(0, input[input.size() - 1][0][0]) * error } };
+			s.push_back(initial);
+		}
+		else {
+			s.push_back(MultMatrix(GenMatrix(input[x], 1), MultMatrix(s[x + 1], w[x + 1])));
+		}
+	}
+
+	std::reverse(s.begin(), s.end());
+
+	for (int x = 0; x < input.size(); x++) {
+
+	}
+
+	//sN = fN(nN)(wN + 1)(sN + 1)
 
 	//s3 = (-2)F3(n3)(e)
 	//s2 = F2(n2)(w3)(s3)
@@ -104,14 +124,25 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	b1[1] = b1[1] - (0.1 * s1[1][0]);*/
 }
 
-std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<double> input, int function) {
+std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<std::vector<double>> input, int function) {
 	std::vector<std::vector<double>> output;
 	std::vector<double> row;
+
+	int layer;
+
+	if (input.size() > input[0].size()) {
+		layer = 1;
+	}
 
 	for (int x = 0; x < input.size(); x++) {
 		for (int y = 0; y < input.size(); y++) {
 			if (y == x) {
-				row.push_back(DActivation(function, input[x]));
+				if (layer == 1) {
+					row.push_back(DActivation(function, input[x][0]));
+				}
+				else {
+					row.push_back(DActivation(function, input[0][x]));
+				}
 			}
 			else {
 				row.push_back(0.0);
@@ -124,7 +155,7 @@ std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<double> inp
 	return output;
 }
 
-std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> matA, std::vector<std::vector<double>> matB) {
+std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> matB, std::vector<std::vector<double>> matA) {
 	std::vector<std::vector<double>> product;
 	std::vector<double> row;
 
