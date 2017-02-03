@@ -56,7 +56,6 @@ double PerceptronML::Calculate(double input) {
 
 void PerceptronML::Run() {
 	std::vector<std::vector<std::vector<double>>> a;
-	a.push_back(a0);
 
 	std::vector<std::vector<double>> tempA;
 	for (int x = 0; x < w.size(); x++) {
@@ -69,6 +68,10 @@ void PerceptronML::Run() {
 		a.push_back(tempA);
 	}
 
+	std::reverse(a.begin(), a.end());
+	a.push_back(a0);
+	std::reverse(a.begin(), a.end());
+
 	error = OriginalFunction(a0[0][0]) - a[a.size() - 1][0][0];
 	Backpropagation(error, a);
 
@@ -76,24 +79,47 @@ void PerceptronML::Run() {
 	std::cout << error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
 }
 
+int PerceptronML::GetLargestMat(std::vector<std::vector<double>> mat) {
+	if (mat.size() > mat[0].size()) {
+		return mat.size();
+	}
+
+	return mat[0].size();
+}
+
+double* PerceptronML::GetMatLin(int index, std::vector<std::vector<double>>& mat) {
+	if (mat.size() > mat[0].size()) { return &mat[index][0]; }
+	if (mat.size() < mat[0].size()) { return &mat[0][index]; }
+
+	return &mat[0][0];
+}
+
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
 	std::vector<std::vector<std::vector<double>>> s;
 	std::vector<std::vector<double>> initial;
 
-	for (int x = input.size() - 1; x >= 0; x--) {
-		if (x == input.size() - 1) {
+	for (int x = input.size() - 2; x >= 0; x--) {
+		if (x == input.size() - 2) {
 			initial = { { -2 * DActivation(0, input[input.size() - 1][0][0]) * error } };
 			s.push_back(initial);
 		}
 		else {
-			s.push_back(MultMatrix(GenMatrix(input[x], 1), MultMatrix(s[x + 1], w[x + 1])));
+			s.push_back(MultMatrix(GenMatrix(input[x], 1), MultMatrix(s[(input.size() - 3) - x], w[x + 1])));
 		}
 	}
 
 	std::reverse(s.begin(), s.end());
 
-	for (int x = 0; x < input.size(); x++) {
+	for (int y = 0; y < w.size(); y++) {
+		for (int x = 0; x < GetLargestMat(w[y]); x++) {
+			*GetMatLin(x, w[y]) = *GetMatLin(x, w[y]) - (learningRate * (*GetMatLin(x, s[y])));
+		}
+	}
 
+	for (int y = 0; y < b.size(); y++) {
+		for (int x = 0; x < b[y].size(); x++) {
+			b[y][x] = b[y][x] - (learningRate * (*GetMatLin(x, s[y])));
+		}
 	}
 
 	//sN = fN(nN)(wN + 1)(sN + 1)
@@ -128,7 +154,7 @@ std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<std::vector
 	std::vector<std::vector<double>> output;
 	std::vector<double> row;
 
-	int layer;
+	int layer = 0;
 
 	if (input.size() > input[0].size()) {
 		layer = 1;

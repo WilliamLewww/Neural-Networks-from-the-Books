@@ -25,6 +25,9 @@ class PerceptronML {
 	double DActivation(int function, double value);
 
 	double OriginalFunction(double value);
+
+	int GetLargestMat(std::vector<std::vector<double>> mat);
+	double* GetMatLin(int index, std::vector<std::vector<double>>& mat);
 public:
 	double error;
 
