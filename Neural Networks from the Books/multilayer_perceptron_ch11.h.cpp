@@ -5,7 +5,8 @@ void PerceptronML::GenerateWeightBias(int input, int output) {
 	std::vector<double> row;
 	for (int y = 0; y < output; y++) {
 		for (int x = 0; x < input; x++) {
-			row.push_back((double)(rand() % 210 - 100) / 100);
+			row.push_back(0.0);
+			//row.push_back((double)(rand() % 210 - 100) / 100);
 		}
 
 		tempWeight.push_back(row);
@@ -14,7 +15,8 @@ void PerceptronML::GenerateWeightBias(int input, int output) {
 
 	std::vector<double> tempBias;
 	for (int x = 0; x < output; x++) {
-		tempBias.push_back((double)(rand() % 210 - 100) / 100);
+		tempBias.push_back(0.0);
+		//tempBias.push_back((double)(rand() % 210 - 100) / 100);
 	}
 
 	w.push_back(tempWeight);
@@ -42,6 +44,7 @@ void PerceptronML::Initialize(double input) {
 double PerceptronML::Calculate(double input) {
 	std::vector<std::vector<std::vector<double>>> a;
 	std::vector<std::vector<double>> tempA;
+
 	for (int x = 0; x < w.size(); x++) {
 		if (x == 0) {
 			tempA = FeedForward(a0, w[x], b[x], 1);
@@ -80,7 +83,8 @@ void PerceptronML::Run() {
 	Backpropagation(error, a);
 
 	//std::cout << floor(error * 10000 + 0.5) / 10000 << std::endl;
-	std::cout << error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
+	std::cout << b[0][0] << ":" <<error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
+	//std::cout << error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
 }
 
 int PerceptronML::GetLargestMat(std::vector<std::vector<double>> mat) {
