@@ -122,8 +122,8 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 			s = {{{ -2 * (DActivation(0, input[y][0][0])) * error }}};
 		}
 		else {
-			std::cout << MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])).size() << ":" << 
-				MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1]))[0].size() << std::endl;
+			//std::cout << MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])).size() << ":" << 
+				//MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1]))[0].size() << std::endl;
 			s.push_back(MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])));
 		}
 
@@ -131,6 +131,20 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	}
 
 	std::reverse(s.begin(), s.end());
+
+	for (int y = 0; y < w.size(); y++) {
+		for (int x = 0; x < w[y].size(); x++) {
+			for (int z = 0; z < w[y][x].size(); z++) {
+				w[y][x][z] = w[y][x][z] - (learningRate * (*GetMatLin(x, s[y])));
+			}
+		}
+	}
+
+	for (int y = 0; y < b.size(); y++) {
+		for (int x = 0; x < b[y].size(); x++) {
+			b[y][x] = b[y][x] - (learningRate * (*GetMatLin(x, s[y])));
+		}
+	}
 
 	//sN = fN(nN)(wN + 1)(sN + 1)
 

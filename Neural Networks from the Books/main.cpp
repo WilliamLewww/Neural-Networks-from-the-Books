@@ -56,10 +56,9 @@ int main(int argc, char *argv[]) {
 		std::cin >> input;
 
 		perceptron.FeedInput(input);
-		perceptron.Run();
-		/*while (perceptron.error > 0.001 || perceptron.error < -0.001) {
+		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
 			perceptron.Run();
-		}*/
+		}
 	}
 
 	std::cin.ignore();

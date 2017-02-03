@@ -4,17 +4,22 @@ g:\projects\neural networks from the books\neural networks from the books\multil
 g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(65): warning C4018: '<': signed/unsigned mismatch
 g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(105): warning C4018: '<': signed/unsigned mismatch
 g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(106): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(178): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(179): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(135): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(136): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(137): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(143): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(144): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(192): warning C4018: '<': signed/unsigned mismatch
 g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(193): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(194): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(216): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(217): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(218): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(236): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(237): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(238): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(264): warning C4715: 'PerceptronML::Activation': not all control paths return a value
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(277): warning C4715: 'PerceptronML::DActivation': not all control paths return a value
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(207): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(208): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(230): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(231): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(232): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(250): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(251): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(252): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(278): warning C4715: 'PerceptronML::Activation': not all control paths return a value
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(291): warning C4715: 'PerceptronML::DActivation': not all control paths return a value
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
