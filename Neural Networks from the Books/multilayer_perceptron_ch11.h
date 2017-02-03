@@ -14,8 +14,9 @@ class PerceptronML {
 	std::vector<std::vector<double>> b;
 
 	std::vector<std::vector<double>> a0;
-
-	std::vector<std::vector<double>> GenMatrix(std::vector<std::vector<double>> input, int function);
+	
+	std::vector<std::vector<double>> FlipMatrix(std::vector<std::vector<double>> mat);
+	std::vector<std::vector<double>> GenJacobianMatrix(std::vector<std::vector<double>> input, int function);
 	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> matB, std::vector<std::vector<double>> matA);
 	std::vector<std::vector<double>> FeedForward(std::vector<std::vector<double>> input, std::vector<std::vector<double>> weight, std::vector<double> bias, int function);
 

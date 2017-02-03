@@ -9,6 +9,7 @@ void PerceptronML::GenerateWeightBias(int input, int output) {
 		}
 
 		tempWeight.push_back(row);
+		row.clear();
 	}
 
 	std::vector<double> tempBias;
@@ -29,7 +30,10 @@ void PerceptronML::Initialize(double input) {
 	srand(time(0));
 
 	a0 = { { input } };
-	GenerateWeightBias(1, 2);
+	GenerateWeightBias(1, 3);
+	GenerateWeightBias(3, 2);
+	GenerateWeightBias(2, 4);
+	GenerateWeightBias(4, 2);
 	GenerateWeightBias(2, 1);
 
 	error = 1;
@@ -94,35 +98,45 @@ double* PerceptronML::GetMatLin(int index, std::vector<std::vector<double>>& mat
 	return &mat[0][0];
 }
 
+std::vector<std::vector<double>> PerceptronML::FlipMatrix(std::vector<std::vector<double>> mat) {
+	std::vector<std::vector<double>> tempMat;
+	std::vector<double> col;
+
+	for (int x = 0; x < mat[0].size(); x++) {
+		for (int y = 0; y < mat.size(); y++) {
+			col.push_back(mat[y][x]);
+		}
+
+		tempMat.push_back(col);
+		col.clear();
+	}
+
+	return tempMat;
+}
+
 void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::vector<double>>> input) {
 	std::vector<std::vector<std::vector<double>>> s;
-	std::vector<std::vector<double>> initial;
-
-	for (int x = input.size() - 2; x >= 0; x--) {
-		if (x == input.size() - 2) {
-			initial = { { -2 * DActivation(0, input[input.size() - 1][0][0]) * error } };
-			s.push_back(initial);
+	int y = input.size() - 1;
+	for (int x = w.size() - 1; x >= 0; x--) {
+		if (x == w.size() - 1) {
+			s = {{{ -2 * (DActivation(0, input[y][0][0])) * error }}};
 		}
 		else {
-			s.push_back(MultMatrix(GenMatrix(input[x], 1), MultMatrix(s[(input.size() - 3) - x], w[x + 1])));
+			std::cout << MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])).size() << ":" << 
+				MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1]))[0].size() << std::endl;
+			s.push_back(MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])));
 		}
+
+		y -= 1;
 	}
 
 	std::reverse(s.begin(), s.end());
 
-	for (int y = 0; y < w.size(); y++) {
-		for (int x = 0; x < GetLargestMat(w[y]); x++) {
-			*GetMatLin(x, w[y]) = *GetMatLin(x, w[y]) - (learningRate * (*GetMatLin(x, s[y])));
-		}
-	}
-
-	for (int y = 0; y < b.size(); y++) {
-		for (int x = 0; x < b[y].size(); x++) {
-			b[y][x] = b[y][x] - (learningRate * (*GetMatLin(x, s[y])));
-		}
-	}
-
 	//sN = fN(nN)(wN + 1)(sN + 1)
+
+	//s0 = (-2)F0(n0)(e)
+	//s1 = F1(n1)(w2)(s0)
+	//s2 = F1(n1)(w3)(s1)
 
 	//s3 = (-2)F3(n3)(e)
 	//s2 = F2(n2)(w3)(s3)
@@ -150,7 +164,7 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	b1[1] = b1[1] - (0.1 * s1[1][0]);*/
 }
 
-std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<std::vector<double>> input, int function) {
+std::vector<std::vector<double>> PerceptronML::GenJacobianMatrix(std::vector<std::vector<double>> input, int function) {
 	std::vector<std::vector<double>> output;
 	std::vector<double> row;
 
@@ -160,36 +174,49 @@ std::vector<std::vector<double>> PerceptronML::GenMatrix(std::vector<std::vector
 		layer = 1;
 	}
 
-	for (int x = 0; x < input.size(); x++) {
-		for (int y = 0; y < input.size(); y++) {
-			if (y == x) {
-				if (layer == 1) {
+	if (layer == 1) {
+		for (int x = 0; x < input.size(); x++) {
+			for (int y = 0; y < input.size(); y++) {
+				if (y == x) {
 					row.push_back(DActivation(function, input[x][0]));
 				}
 				else {
-					row.push_back(DActivation(function, input[0][x]));
+					row.push_back(0.0);
 				}
 			}
-			else {
-				row.push_back(0.0);
-			}
-		}
 
-		output.push_back(row);
+			output.push_back(row);
+			row.clear();
+		}
+	}
+	else {
+		for (int x = 0; x < input[0].size(); x++) {
+			for (int y = 0; y < input[0].size(); y++) {
+				if (y == x) {
+					row.push_back(DActivation(function, input[0][x]));
+				}
+				else {
+					row.push_back(0.0);
+				}
+			}
+
+			output.push_back(row);
+			row.clear();
+		}
 	}
 
 	return output;
 }
 
-std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> matB, std::vector<std::vector<double>> matA) {
+std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vector<double>> weight, std::vector<std::vector<double>> input) {
 	std::vector<std::vector<double>> product;
 	std::vector<double> row;
 
 	double total = 0;;
-	for (int y = 0; y < matB.size(); y++) {
-		for (int x = 0; x < matA[0].size(); x++) {
-			for (int inner = 0; inner < matB[0].size(); inner++) {
-				total += matB[y][inner] * matA[inner][x];
+	for (int y = 0; y < weight.size(); y++) {
+		for (int x = 0; x < input[0].size(); x++) {
+			for (int inner = 0; inner < weight[0].size(); inner++) {
+				total += weight[y][inner] * input[inner][x];
 			}
 			row.push_back(total);
 			total = 0;
