@@ -3,6 +3,7 @@
 #include "perceptron_network_ch3.h"
 #include "perceptron_learning_rule_ch4.h"
 #include "multilayer_perceptron_ch11.h"
+#include <math.h>
 #include <iostream>
 
 ///CHAPTER 3
@@ -57,7 +58,9 @@ int main(int argc, char *argv[]) {
 
 		perceptron.FeedInput(input);
 		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
-			perceptron.Run();
+			if (!perceptron.Run()) {
+				perceptron.Initialize(0);
+			}
 		}
 	}
 

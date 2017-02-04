@@ -32,7 +32,7 @@ class PerceptronML {
 public:
 	double error;
 
-	void Run();
+	bool Run();
 	double Calculate(double input);
 
 	void FeedInput(double input);
