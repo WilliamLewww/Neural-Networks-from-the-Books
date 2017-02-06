@@ -1,10 +1,10 @@
-#include "hamming_network_ch3.h"
-#include "hopfield_network_ch3.h"
-#include "perceptron_network_ch3.h"
-#include "perceptron_learning_rule_ch4.h"
-#include "multilayer_perceptron_ch11.h"
-#include <math.h>
-#include <iostream>
+//#include "hamming_network_ch3.h"
+//#include "hopfield_network_ch3.h"
+//#include "perceptron_network_ch3.h"
+//#include "perceptron_learning_rule_ch4.h"
+//#include "multilayer_perceptron_ch11.h"
+//#include <math.h>
+//#include <iostream>
 
 ///CHAPTER 3
 //Hamming hamming;
@@ -48,21 +48,21 @@
 //}
 
 ///CHAPTER 11 
-PerceptronML perceptron;
-int main(int argc, char *argv[]) {
-	double input;
-	perceptron.Initialize(0);
-
-	while (true) {
-		std::cin >> input;
-
-		perceptron.FeedInput(input);
-		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
-			if (!perceptron.Run()) {
-				perceptron.Initialize(0);
-			}
-		}
-	}
-
-	std::cin.ignore();
-}
+//PerceptronML perceptron;
+//int main(int argc, char *argv[]) {
+//	double input;
+//	perceptron.Initialize(0);
+//
+//	while (true) {
+//		std::cin >> input;
+//
+//		perceptron.FeedInput(input);
+//		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
+//			if (!perceptron.Run()) {
+//				perceptron.Initialize(0);
+//			}
+//		}
+//	}
+//
+//	std::cin.ignore();
+//}
