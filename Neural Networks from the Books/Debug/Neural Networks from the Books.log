@@ -1,9 +1,33 @@
-﻿  main.cpp
+﻿  multilayer_perceptron_ch11.h.cpp
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(51): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(71): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(114): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(115): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(144): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(145): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(146): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(152): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(153): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(201): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(202): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(216): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(217): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(239): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(240): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(241): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(259): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(260): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(261): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(300): warning C4715: 'PerceptronML::DActivation': not all control paths return a value
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.h.cpp(287): warning C4715: 'PerceptronML::Activation': not all control paths return a value
+  Skipping... (no relevant changes detected)
+  main.cpp
   multilayer_perceptron_c.c
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(27): warning C4013: 'malloc' undefined; assuming extern returning int
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(27): warning C4047: '=': 'double **' differs in levels of indirection from 'int'
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(29): warning C4047: '=': 'double *' differs in levels of indirection from 'int'
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(5): warning C4013: 'time' undefined; assuming extern returning int
   main_c.c
   Generating Code...
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)

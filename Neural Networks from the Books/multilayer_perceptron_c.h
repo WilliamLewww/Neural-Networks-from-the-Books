@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #ifndef MULTILAYER_PERCEPTRON_C
 #define MULTILAYER_PERCEPTRON_C
 
@@ -6,14 +8,19 @@
 
 typedef struct PerceptronML {
 	double learningRate;
+
 	double*** w;
+	int weightLength;
+
 	double** b;
+	int biasLength;
+
 	double a0[1][1];
 
 } PerceptronML;
 
 void perceptronML_feedInput(PerceptronML*, double);
 void perceptronML_init(PerceptronML*, double);
-void perceptronML_generateWeightBias(double**, double*, int, int);
+void perceptronML_generateWeightBias(PerceptronML*, int, int);
 
 #endif
