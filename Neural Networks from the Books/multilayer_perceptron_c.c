@@ -1,8 +1,36 @@
 #include "multilayer_perceptron_c.h"
 
+void init_doublevector(DoubleVector* vector) {
+	vector->size = 0;
+}
+
+void append_doublevector(DoubleVector* vector, double element) {
+	if (vector->size == 0) {
+		vector->array = malloc(sizeof(double));
+		vector->array[vector->size] = element;
+	}
+	else {
+		vector->array = realloc(vector->array, (vector->size + 1) * sizeof(double));
+		vector->array[vector->size] = element;
+	}
+
+	//printf("%f\n", vector->array[vector->size]);
+	//printf("%f\n", vector->array[vector->size + 1]);
+
+	vector->size += 1;
+}
+
 void perceptronML_init(PerceptronML* perceptron, double input) {
 	time_t t;
 	srand((unsigned)time(&t));
+
+	DoubleVector vector;
+	init_doublevector(&vector);
+	append_doublevector(&vector, 5);
+	append_doublevector(&vector, 1);
+	append_doublevector(&vector, 6);
+	printf("%f\n", vector.array[0]);
+	printf("%f\n", vector.array[1]);
 
 	perceptron->learningRate = 0.1;
 	perceptron->a0[0][0] = input;
@@ -10,8 +38,8 @@ void perceptronML_init(PerceptronML* perceptron, double input) {
 	perceptron->weightLength = 0;
 	perceptron->biasLength = 0;
 
-	perceptronML_generateWeightBias(perceptron, 1, 2);
-	perceptronML_generateWeightBias(perceptron, 2, 1);
+	/*perceptronML_generateWeightBias(perceptron, 1, 2);
+	perceptronML_generateWeightBias(perceptron, 2, 1);*/
 }
 
 void perceptronML_feedInput(PerceptronML* perceptron, double value) {
@@ -33,20 +61,30 @@ void perceptronML_feedInput(PerceptronML* perceptron, double value) {
 //free(x);
 
 void perceptronML_generateWeightBias(PerceptronML* perceptron, int input, int output) {
-	perceptron->w = malloc(perceptron->weightLength * sizeof(double));
-	perceptron->w[perceptron->weightLength] = malloc(output * sizeof(double));
-	for (int y = 0; y < output; y++) {
-		perceptron->w[perceptron->weightLength][y] = malloc(input * sizeof(double));
-		for (int x = 0; x < input; x++) {
-			perceptron->w[perceptron->weightLength][y][x] = (double)(rand() % 210 - 100) / 100;
-			printf("%f\n", perceptron->w[perceptron->weightLength][y][x]);
+	if (perceptron->weightLength == 0) {
+		perceptron->w = malloc(perceptron->weightLength * sizeof(double));
+		perceptron->w[perceptron->weightLength] = malloc(output * sizeof(double));
+		for (int y = 0; y < output; y++) {
+			perceptron->w[perceptron->weightLength][y] = malloc(input * sizeof(double));
+			for (int x = 0; x < input; x++) {
+				perceptron->w[perceptron->weightLength][y][x] = (double)(rand() % 210 - 100) / 100;
+				printf("%f\n", perceptron->w[perceptron->weightLength][y][x]);
+			}
 		}
 	}
+	else {
 
-	perceptron->b = malloc(perceptron->biasLength * sizeof(double));
-	perceptron->b[perceptron->weightLength] = malloc(output * sizeof(double));
-	for (int y = 0; y < output; y++) {
-		perceptron->b[perceptron->biasLength][y] = (double)(rand() % 210 - 100) / 100;
+	}
+
+	if (perceptron->biasLength == 0) {
+		perceptron->b = malloc(perceptron->biasLength * sizeof(double));
+		perceptron->b[perceptron->weightLength] = malloc(output * sizeof(double));
+		for (int y = 0; y < output; y++) {
+			perceptron->b[perceptron->biasLength][y] = (double)(rand() % 210 - 100) / 100;
+		}
+	}
+	else {
+
 	}
 
 	perceptron->weightLength += 1;

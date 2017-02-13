@@ -1,8 +1,4 @@
-﻿  Skipping... (no relevant changes detected)
-  main.cpp
-  multilayer_perceptron_c.c
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(5): warning C4013: 'time' undefined; assuming extern returning int
-  main_c.c
-  Generating Code...
+﻿  multilayer_perceptron_c.c
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(25): warning C4013: 'time' undefined; assuming extern returning int
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)

@@ -7,13 +7,22 @@
 #define PI 3.14159265
 #define e = 2.71828182845904523536;
 
-typedef struct ArrayWithSize3D {
-	double*** array;
+//typedef struct ArrayWithSize3D {
+//	double*** array;
+//
+//	int sizeZ;
+//	int* sizeY;
+//	int** sizeX;
+//};
 
-	int sizeZ;
-	int* sizeY;
-	int** sizeX;
-};
+typedef struct DoubleVector {
+	double* array;
+	int size;
+
+} DoubleVector;
+
+void init_doublevector(DoubleVector*);
+void append_doublevector(DoubleVector*, double element);
 
 typedef struct PerceptronML {
 	double learningRate;
