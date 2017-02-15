@@ -1,25 +1,5 @@
 #include "multilayer_perceptron_c.h"
 
-void init_doublevector(DoubleVector* vector) {
-	vector->size = 0;
-}
-
-void append_doublevector(DoubleVector* vector, double element) {
-	if (vector->size == 0) {
-		vector->array = malloc(sizeof(double));
-		vector->array[vector->size] = element;
-	}
-	else {
-		vector->array = realloc(vector->array, (vector->size + 1) * sizeof(double));
-		vector->array[vector->size] = element;
-	}
-
-	//printf("%f\n", vector->array[vector->size]);
-	//printf("%f\n", vector->array[vector->size + 1]);
-
-	vector->size += 1;
-}
-
 void perceptronML_init(PerceptronML* perceptron, double input) {
 	time_t t;
 	srand((unsigned)time(&t));

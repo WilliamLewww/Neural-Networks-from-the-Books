@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Chapter 4">
       <UniqueIdentifier>{a6fd0c9b-f9b0-4535-ad7f-710586831348}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\transcribed">
+      <UniqueIdentifier>{8866c75c-0a73-4652-bc11-0f6d89764092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Chapter 11\transcribed">
+      <UniqueIdentifier>{bfab72df-e554-4410-998e-d9df8d3e0dac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,11 +57,14 @@
     <ClCompile Include="multilayer_perceptron_ch11.h.cpp">
       <Filter>Source Files\Chapter 11</Filter>
     </ClCompile>
-    <ClCompile Include="multilayer_perceptron_c.c">
-      <Filter>Source Files\Chapter 11</Filter>
-    </ClCompile>
     <ClCompile Include="main_c.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="multilayer_perceptron_c.c">
+      <Filter>Source Files\transcribed</Filter>
+    </ClCompile>
+    <ClCompile Include="vector_structure.c">
+      <Filter>Source Files\Chapter 11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +84,10 @@
       <Filter>Header Files\Chapter 11</Filter>
     </ClInclude>
     <ClInclude Include="multilayer_perceptron_c.h">
-      <Filter>Header Files\Chapter 11</Filter>
+      <Filter>Header Files\Chapter 11\transcribed</Filter>
+    </ClInclude>
+    <ClInclude Include="vector_structure.h">
+      <Filter>Header Files\Chapter 11\transcribed</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
