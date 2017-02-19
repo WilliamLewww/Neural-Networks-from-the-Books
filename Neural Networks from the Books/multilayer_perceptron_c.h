@@ -11,11 +11,8 @@
 typedef struct PerceptronML {
 	double learningRate;
 
-	double*** w;
-	int weightLength;
-
-	double** b;
-	int biasLength;
+	vector3 w;
+	vector2 b;
 
 	double a0[1][1];
 
