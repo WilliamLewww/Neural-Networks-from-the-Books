@@ -10,8 +10,20 @@ void perceptronML_init(PerceptronML* perceptron, double input) {
 	init_vector3(&perceptron->w);
 	init_vector2(&perceptron->b);
 
-	/*perceptronML_generateWeightBias(perceptron, 1, 2);
-	perceptronML_generateWeightBias(perceptron, 2, 1);*/
+	vector1 test;
+	init_vector(&test);
+	append_vector(&test, 5);
+	append_vector(&test, 2);
+	append_vector(&test, 12);
+	printf("%f\n", test.array[0]);
+	printf("%f\n", test.array[1]);
+	printf("%f\n", test.array[2]);
+	printf("%d\n", test.size);
+	clear_vector(&test);
+	printf("%d\n", test.size);
+
+	//perceptronML_generateWeightBias(perceptron, 1, 2);
+	//perceptronML_generateWeightBias(perceptron, 2, 1);
 }
 
 void perceptronML_feedInput(PerceptronML* perceptron, double value) {
