@@ -24,6 +24,8 @@ void perceptronML_feedInput(PerceptronML* perceptron, double value) {
 	init_vector(&tempVec);
 	append_vector(&tempVec, value);
 	append_vector2(&perceptron->a0, create_vector(&tempVec));
+
+	perceptron->error = 1;
 }
 
 void perceptronML_generateWeightBias(PerceptronML* perceptron, int input, int output) {
