@@ -1,10 +1,11 @@
-//#include "hamming_network_ch3.h"
-//#include "hopfield_network_ch3.h"
-//#include "perceptron_network_ch3.h"
-//#include "perceptron_learning_rule_ch4.h"
-//#include "multilayer_perceptron_ch11.h"
-//#include <math.h>
-//#include <iostream>
+#include "hamming_network_ch3.h"
+#include "hopfield_network_ch3.h"
+#include "perceptron_network_ch3.h"
+#include "perceptron_learning_rule_ch4.h"
+#include "multilayer_perceptron_ch11.h"
+#include "global.h"
+#include <math.h>
+#include <iostream>
 
 ///CHAPTER 3
 //Hamming hamming;
@@ -66,3 +67,59 @@
 //
 //	std::cin.ignore();
 //}
+
+#include <SDL.h>
+#include <SDL_opengl.h>
+
+void Render(SDL_Window* window, SDL_GLContext context);
+
+SDL_Event event;
+SDL_GLContext context;
+static SDL_Window* displayWindow;
+
+PerceptronML perceptron;
+int frameStart, frameEnd, deltaTime = 0, timer = 0;
+int main(int argc, char *argv[]) {
+	displayWindow = SDL_CreateWindow("Net Visualiser", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
+	context = SDL_GL_CreateContext(displayWindow);
+	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
+
+	double input;
+	perceptron.Initialize(0);
+
+	while (true) {
+		std::cin >> input;
+
+		perceptron.FeedInput(input);
+		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
+			frameStart = SDL_GetTicks();
+
+			if (timer > 100) {
+				Render(displayWindow, context);
+				if (!perceptron.Run()) {
+					perceptron.Initialize(0);
+				}
+				timer = 0.0;
+			}
+
+			frameEnd = SDL_GetTicks();
+			deltaTime = frameEnd - frameStart;
+			timer += deltaTime;
+		}
+	}
+
+	return 0;
+}
+
+void Render(SDL_Window* window, SDL_GLContext context) {
+	SDL_GL_MakeCurrent(window, context);
+	glClearColor(ConvertColor(69), ConvertColor(177), ConvertColor(237), 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+
+	SDL_GL_SwapWindow(window);
+}
+
+float ConvertColor(int rgbValue) {
+	return (float)rgbValue / 255;
+}

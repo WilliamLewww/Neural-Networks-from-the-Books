@@ -1,10 +1,3 @@
-﻿  multilayer_perceptron_c.c
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(5): warning C4013: 'time' undefined; assuming extern returning int
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(102): warning C4101: 'tempVec': unreferenced local variable
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(148): warning C4133: 'function': incompatible types - from 'vector1 *' to 'vector2 *'
-  main_c.c
-  Generating Code...
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(258): warning C4715: 'perceptronML_dActivation': not all control paths return a value
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(245): warning C4715: 'perceptronML_activation': not all control paths return a value
+﻿  LINK : G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe not found or not built by the last incremental link; performing full link
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
