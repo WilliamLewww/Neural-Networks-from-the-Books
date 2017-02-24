@@ -1,5 +1,18 @@
 #include "vector_structure.h"
 
+void reverse_vector3(vector3* vector) {
+	vector3 newVector;
+	newVector.size = vector->size;
+	newVector.array = malloc(newVector.size * sizeof(double));
+	for (int x = 0; x < newVector.size; x++) {
+		newVector.array[x] = vector->array[x];
+	}
+
+	for (int x = 0; x < newVector.size; x++) {
+		vector->array[x] = newVector.array[newVector.size - 1 - x];
+	}
+}
+
 vector1 create_vector(vector1* vector) {
 	vector1 newVector;
 	newVector.size = vector->size;
@@ -38,7 +51,8 @@ void init_vector(vector1* vector) {
 }
 
 void clear_vector(vector1* vector) {
-	free(vector->array);
+	//free(vector->array);
+	vector->array = malloc(0);
 	vector->size = 0;
 }
 

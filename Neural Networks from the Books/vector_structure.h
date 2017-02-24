@@ -31,6 +31,7 @@ typedef struct vector3 {
 
 } vector3;
 
+void reverse_vector3(vector3*);
 void init_vector3(vector3*);
 void append_vector3(vector3*, vector2);
 void clear_vector3(vector3*);

@@ -235,7 +235,7 @@ std::vector<std::vector<double>> PerceptronML::MultMatrix(std::vector<std::vecto
 	std::vector<std::vector<double>> product;
 	std::vector<double> row;
 
-	double total = 0;;
+	double total = 0;
 	for (int y = 0; y < weight.size(); y++) {
 		for (int x = 0; x < input[0].size(); x++) {
 			for (int inner = 0; inner < weight[0].size(); inner++) {
