@@ -1,5 +1,38 @@
 #include "vector_structure.h"
 
+vector1 create_vector(vector1* vector) {
+	vector1 newVector;
+	newVector.size = vector->size;
+	newVector.array = malloc(newVector.size * sizeof(double));
+	for (int x = 0; x < newVector.size; x++) {
+		newVector.array[x] = vector->array[x];
+	}
+
+	return newVector;
+}
+
+vector2 create_vector2(vector2* vector) {
+	vector2 newVector;
+	newVector.size = vector->size;
+	newVector.array = malloc(newVector.size * sizeof(vector->array));
+	for (int x = 0; x < newVector.size; x++) {
+		newVector.array[x] = vector->array[x];
+	}
+
+	return newVector;
+}
+
+vector3 create_vector3(vector3* vector) {
+	vector3 newVector;
+	newVector.size = vector->size;
+	newVector.array = malloc(newVector.size * sizeof(vector->array));
+	for (int x = 0; x < newVector.size; x++) {
+		newVector.array[x] = vector->array[x];
+	}
+
+	return newVector;
+}
+
 void init_vector(vector1* vector) {
 	vector->size = 0;
 }
@@ -30,10 +63,6 @@ void init_vector2(vector2* vector) {
 }
 
 void clear_vector2(vector2* vector) {
-	for (int x = 0; x < vector->size; x++) {
-		free(vector->array[x].array);
-		vector->array[x].size = 0;
-	}
 	free(vector->array);
 	vector->size = 0;
 }
@@ -59,14 +88,6 @@ void init_vector3(vector3* vector) {
 }
 
 void clear_vector3(vector3* vector) {
-	for (int x = 0; x < vector->size; x++) {
-		for (int y = 0; y < vector->array[x].size; y++) {
-			free(vector->array[x].array[y].array);
-			vector->array[x].array[y].size = 0;
-		}
-		free(vector->array[x].array);
-		vector->array[x].size = 0;
-	}
 	free(vector->array);
 	vector->size = 0;
 }
