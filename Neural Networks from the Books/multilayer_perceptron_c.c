@@ -4,8 +4,13 @@ void perceptronML_init(PerceptronML* perceptron, double input) {
 	time_t t;
 	srand((unsigned)time(&t));
 
+	perceptron->error = 1;
+
 	perceptron->learningRate = 0.1;
-	perceptron->a0[0][0] = input;
+	vector1 tempVec;
+	init_vector(&tempVec);
+	append_vector(&tempVec, input);
+	append_vector2(&perceptron->a0, create_vector(&tempVec));
 
 	init_vector3(&perceptron->w);
 	init_vector2(&perceptron->b);
@@ -15,7 +20,10 @@ void perceptronML_init(PerceptronML* perceptron, double input) {
 }
 
 void perceptronML_feedInput(PerceptronML* perceptron, double value) {
-	perceptron->a0[0][0] = value;
+	vector1 tempVec;
+	init_vector(&tempVec);
+	append_vector(&tempVec, value);
+	append_vector2(&perceptron->a0, create_vector(&tempVec));
 }
 
 void perceptronML_generateWeightBias(PerceptronML* perceptron, int input, int output) {
@@ -46,17 +54,56 @@ void perceptronML_generateWeightBias(PerceptronML* perceptron, int input, int ou
 	clear_vector(&tempBias);
 }
 
-double*** copyArray(double*** parent, int sizeZ, int* sizeY, int** sizeX) {
-	double*** tempArray = malloc(sizeZ * sizeof(double));
-	for (int z = 0; z < sizeZ; z++) {
-		tempArray[z] = malloc(sizeY[z] * sizeof(double));
-		for (int y = 0; y < sizeY[z]; y++) {
-			tempArray[z][y] = malloc(sizeX[z][y] * sizeof(double));
-			for (int x = 0; x < sizeX[z][y]; x++) {
-				tempArray[z][y][x] = parent[z][y][x];
-			}
+void perceptronML_run(PerceptronML* perceptron) {
+	vector3 a;
+	init_vector3(&a);
+	vector2 tempA;
+	init_vector2(&tempA);
+
+	for (int x = 0; x < perceptron->w.size; x++) {
+		if (x == 0) {
+			tempA = perceptronML_feedForward(perceptron->a0, perceptron->w.array[x], perceptron->b.array[x], 1);
 		}
+		else {
+			tempA = perceptronML_feedForward(a.array[x - 1], perceptron->w.array[x], perceptron->b.array[x], 0);
+		}
+		append_vector3(&a, create_vector2(&tempA));
+	}
+}
+
+vector2 perceptronML_feedForward(vector2 input, vector2 weight, vector1 bias, int function) {
+	vector2 product;
+	init_vector2(&product);
+	vector1 row;
+	init_vector(&row);
+
+	double total = 0;
+	for (int y = 0; y < weight.size; y++) {
+		for (int x = 0; x < input.array[0].size; x++) {
+			for (int inner = 0; inner < weight.array[0].size; inner++) {
+				total += weight.array[y].array[inner] * input.array[inner].array[x];
+			}
+
+			total = perceptronML_activation(function, total + bias.array[y]);
+			append_vector(&row, total);
+			total = 0;
+		}
+		append_vector2(&product, create_vector(&total));
+		clear_vector(&row);
 	}
 
-	return tempArray;
+	return product;
+}
+
+double perceptronML_activation(int function, double value) {
+	switch (function) {
+	case 0:
+		//Linear
+		return value;
+	case 1:
+		//Log-Sigmoid
+		return 1 / (1 + pow(2.71828182845904523536, -value));
+	default:
+		break;
+	}
 }

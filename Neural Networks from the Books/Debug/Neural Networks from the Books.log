@@ -1,4 +1,10 @@
-﻿  multilayer_perceptron_c.c
+﻿  Skipping... (no relevant changes detected)
+  main.cpp
+  multilayer_perceptron_c.c
 g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(5): warning C4013: 'time' undefined; assuming extern returning int
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(91): warning C4133: 'function': incompatible types - from 'double *' to 'vector1 *'
+  main_c.c
+  Generating Code...
+g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_c.c(109): warning C4715: 'perceptronML_activation': not all control paths return a value
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
