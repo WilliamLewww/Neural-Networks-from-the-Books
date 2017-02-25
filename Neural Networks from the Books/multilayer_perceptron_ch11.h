@@ -8,13 +8,6 @@
 const double e = 2.71828182845904523536;
 
 class PerceptronML {
-	double learningRate = 0.1;
-
-	std::vector<std::vector<std::vector<double>>> w;
-	std::vector<std::vector<double>> b;
-
-	std::vector<std::vector<double>> a0;
-	
 	std::vector<std::vector<double>> FlipMatrix(std::vector<std::vector<double>> mat);
 	std::vector<std::vector<double>> GenJacobianMatrix(std::vector<std::vector<double>> input, int function);
 	std::vector<std::vector<double>> MultMatrix(std::vector<std::vector<double>> matB, std::vector<std::vector<double>> matA);
@@ -30,6 +23,13 @@ class PerceptronML {
 	int GetLargestMat(std::vector<std::vector<double>> mat);
 	double* GetMatLin(int index, std::vector<std::vector<double>>& mat);
 public:
+	double learningRate = 0.1;
+
+	std::vector<std::vector<std::vector<double>>> w;
+	std::vector<std::vector<double>> b;
+
+	std::vector<std::vector<double>> a0;
+
 	double error;
 
 	bool Run();

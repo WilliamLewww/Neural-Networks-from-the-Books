@@ -1,3 +1,5 @@
-﻿  LINK : G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe not found or not built by the last incremental link; performing full link
+﻿  visualiser.cpp
+g:\projects\neural networks from the books\neural networks from the books\visualiser.cpp(8): warning C4018: '<': signed/unsigned mismatch
+g:\projects\neural networks from the books\neural networks from the books\visualiser.cpp(9): warning C4018: '<': signed/unsigned mismatch
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)

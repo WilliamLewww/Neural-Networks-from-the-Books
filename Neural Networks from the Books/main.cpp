@@ -70,6 +70,8 @@
 
 #include <SDL.h>
 #include <SDL_opengl.h>
+#include "spritebatch.h"
+#include "visualiser.h"
 
 void Render(SDL_Window* window, SDL_GLContext context);
 
@@ -78,6 +80,7 @@ SDL_GLContext context;
 static SDL_Window* displayWindow;
 
 PerceptronML perceptron;
+Visualiser visualiser;
 int frameStart, frameEnd, deltaTime = 0, timer = 0;
 int main(int argc, char *argv[]) {
 	displayWindow = SDL_CreateWindow("Net Visualiser", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
@@ -86,6 +89,11 @@ int main(int argc, char *argv[]) {
 
 	double input;
 	perceptron.Initialize(0);
+
+	visualiser.SetPerceptron(&perceptron);
+	visualiser.Initialize();
+
+	Render(displayWindow, context);
 
 	while (true) {
 		std::cin >> input;
@@ -116,6 +124,8 @@ void Render(SDL_Window* window, SDL_GLContext context) {
 	glClearColor(ConvertColor(69), ConvertColor(177), ConvertColor(237), 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
+
+	visualiser.Draw();
 
 	SDL_GL_SwapWindow(window);
 }

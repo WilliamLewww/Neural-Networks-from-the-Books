@@ -1,5 +1,15 @@
 #include "spritebatch.h"
 
+void Circle::Draw() {
+	DrawCircle(position, radius, color);
+}
+
+void Circle::SetColor(double r, double g, double b) {
+	color[0] = ConvertColor(r);
+	color[1] = ConvertColor(g);
+	color[2] = ConvertColor(b);
+}
+
 void DrawRect(Vector2 position, int width, int height) {
 	Vector2 vectors[4]{
 		Vector2(0, 0),
