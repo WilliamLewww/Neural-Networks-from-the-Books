@@ -1,26 +1,4 @@
-﻿  multilayer_perceptron_ch11.cpp
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(50): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(69): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(86): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(127): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(128): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(157): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(158): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(159): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(165): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(166): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(214): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(215): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(229): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(230): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(252): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(253): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(254): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(272): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(273): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(274): warning C4018: '<': signed/unsigned mismatch
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(300): warning C4715: 'PerceptronML::Activation': not all control paths return a value
-g:\projects\neural networks from the books\neural networks from the books\multilayer_perceptron_ch11.cpp(313): warning C4715: 'PerceptronML::DActivation': not all control paths return a value
+﻿  main.cpp
+g:\projects\neural networks from the books\neural networks from the books\main.cpp(116): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)

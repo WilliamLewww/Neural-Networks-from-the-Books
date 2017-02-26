@@ -4,6 +4,10 @@ void Node::Draw() {
 	DrawCircle(position, radius, color);
 }
 
+void Node::SetValue(double* val) {
+	value = val;
+}
+
 void Node::SetColor(double r, double g, double b) {
 	color[0] = ConvertColor(r);
 	color[1] = ConvertColor(g);
@@ -15,11 +19,21 @@ void Visualiser::SetPerceptron(PerceptronML* perceptronParam) {
 }
 
 void Visualiser::Initialize() {
-	nodeList.push_back(Node(Vector2(100, (SCREENHEIGHT / 4) * 2), 25, &perceptron->a0[0][0]));
+	nodeList.push_back(Node(Vector2(100, (SCREENHEIGHT / 4) * 2), 25));
 
 	for (int x = 0; x < perceptron->b.size(); x++) {
 		for (int y = 0; y < perceptron->b[x].size(); y++) {
-			//nodeList.push_back(Node(Vector2((SCREENWIDTH / (perceptron->b.size() + 1)) * (x + 1) + 100, (y + 1) * ((SCREENHEIGHT / 2) / (perceptron->b[x].size() + 1)) + (SCREENHEIGHT / 4)), 25));
+			nodeList.push_back(Node(Vector2((SCREENWIDTH / (perceptron->b.size() + 1)) * (x + 1) + 100, (y + 1) * ((SCREENHEIGHT / 2) / (perceptron->b[x].size() + 1)) + (SCREENHEIGHT / 4)), 25));
+		}
+	}
+}
+
+void Visualiser::LinkNodes() {
+	int iteration = 0;
+	for (int x = 0; x < perceptron->a.size(); x++) {
+		for (int y = 0; y < perceptron->a[x].size(); y++) {
+			nodeList[iteration].SetValue(&perceptron->a[x][y][0]);
+			iteration += 1;
 		}
 	}
 }

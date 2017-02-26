@@ -104,9 +104,8 @@ int main(int argc, char *argv[]) {
 
 			if (timer > 100) {
 				Render(displayWindow, context);
-				if (!perceptron.Run()) {
-					perceptron.Initialize(0);
-				}
+				if (!perceptron.Run()) { perceptron.Initialize(0); }
+				if (visualiser.isLinked == false) { visualiser.LinkNodes(); visualiser.isLinked = true; }
 				timer = 0.0;
 			}
 

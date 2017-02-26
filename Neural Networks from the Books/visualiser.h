@@ -13,12 +13,18 @@ public:
 
 	double* value;
 
+	Node(Vector2 posPara, float radiusPara) {
+		position = posPara;
+		radius = radiusPara;
+	}
+
 	Node(Vector2 posPara, float radiusPara, double* valueParam) {
 		position = posPara;
 		radius = radiusPara;
 		value = valueParam;
 	}
 
+	void SetValue(double*);
 	void SetColor(double, double, double);
 	void Draw();
 };
@@ -47,7 +53,10 @@ class Visualiser {
 	std::vector<Node> nodeList;
 	PerceptronML* perceptron;
 public:
+	bool isLinked = false;
+
 	void SetPerceptron(PerceptronML*);
 	void Initialize();
+	void LinkNodes();
 	void Draw();
 };
