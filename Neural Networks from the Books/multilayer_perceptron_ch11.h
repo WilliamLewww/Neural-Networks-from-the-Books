@@ -22,10 +22,12 @@ class PerceptronML {
 
 	int GetLargestMat(std::vector<std::vector<double>> mat);
 	double* GetMatLin(int index, std::vector<std::vector<double>>& mat);
+	bool initial = false;
 public:
 	double learningRate = 0.1;
 
 	std::vector<std::vector<std::vector<double>>> w;
+	std::vector<std::vector<std::vector<double>>> a;
 	std::vector<std::vector<double>> b;
 
 	std::vector<std::vector<double>> a0;

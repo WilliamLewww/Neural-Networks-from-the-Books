@@ -45,7 +45,6 @@ void PerceptronML::Initialize(double input) {
 }
 
 double PerceptronML::Calculate(double input) {
-	std::vector<std::vector<std::vector<double>>> a;
 	std::vector<std::vector<double>> tempA;
 
 	for (int x = 0; x < w.size(); x++) {
@@ -65,22 +64,36 @@ double PerceptronML::Calculate(double input) {
 }
 
 bool PerceptronML::Run() {
-	std::vector<std::vector<std::vector<double>>> a;
+	if (initial == false) {
+		std::vector<std::vector<double>> tempA;
+		for (int x = 0; x < w.size(); x++) {
+			if (x == 0) {
+				tempA = FeedForward(a0, w[x], b[x], 1);
+			}
+			else {
+				tempA = FeedForward(a[x - 1], w[x], b[x], 0);
+			}
+			a.push_back(tempA);
+		}
 
-	std::vector<std::vector<double>> tempA;
-	for (int x = 0; x < w.size(); x++) {
-		if (x == 0) {
-			tempA = FeedForward(a0, w[x], b[x], 1);
-		}
-		else {
-			tempA = FeedForward(a[x - 1], w[x], b[x], 0);
-		}
-		a.push_back(tempA);
+		std::reverse(a.begin(), a.end());
+		a.push_back(a0);
+		std::reverse(a.begin(), a.end());
+
+		initial = true;
 	}
+	else {
+		for (int x = 0; x < w.size(); x++) {
+			if (x == 0) {
+				a[x + 1] = FeedForward(a0, w[x], b[x], 1);
+			}
+			else {
+				a[x + 1] = FeedForward(a[x], w[x], b[x], 0);
+			}
+		}
 
-	std::reverse(a.begin(), a.end());
-	a.push_back(a0);
-	std::reverse(a.begin(), a.end());
+		a[0] = a0;
+	}
 
 	error = OriginalFunction(a0[0][0]) - a[a.size() - 1][0][0];
 	Backpropagation(error, a);

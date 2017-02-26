@@ -3,20 +3,7 @@
 #include "vector2.h"
 #include "global.h"
 
-class Circle {
-	double color[3] = { 0, 0, 0 };
-public:
-	Vector2 position;
-	float radius;
 
-	Circle(Vector2 posPara, float radiusPara) {
-		position = posPara;
-		radius = radiusPara;
-	}
-
-	void SetColor(double, double, double);
-	void Draw();
-};
 
 void DrawRect(Vector2 position, int width, int height);
 void DrawRect(Vector2 position, int width, int height, double color[3]);
