@@ -3,8 +3,6 @@
 #include "spritebatch.h"
 #include <vector>
 
-double* GetVisualColor(double value);
-
 class Node {
 	double color[3] = { 0, 0, 0 };
 public:
@@ -25,18 +23,21 @@ public:
 	}
 
 	void SetValue(double*);
-	void SetColor(double, double, double);
+	void SetColor(std::vector<Node>, double);
 	void Draw();
 };
 
 struct Connection {
+	double color[3] = { 0, 0, 0 };
+	double* weight;
+public:
 	Node* nodeA;
 	Node* nodeB;
 
 	Vector2 pointA;
 	Vector2 pointB;
 
-	Connection(Node* nodeAParam, Node* nodeBParam, double weightParam) {
+	Connection(Node* nodeAParam, Node* nodeBParam, double* weightParam) {
 		nodeA = nodeAParam;
 		nodeB = nodeBParam;
 
@@ -46,11 +47,13 @@ struct Connection {
 		weight = weightParam;
 	}
 
-	double weight;
+	void SetColor(std::vector<Connection>, double);
+	void Draw();
 };
 
 class Visualiser {
 	std::vector<Node> nodeList;
+	std::vector<Connection> connectionList;
 	PerceptronML* perceptron;
 public:
 	bool isLinked = false;

@@ -3,8 +3,6 @@
 #include "vector2.h"
 #include "global.h"
 
-
-
 void DrawRect(Vector2 position, int width, int height);
 void DrawRect(Vector2 position, int width, int height, double color[3]);
 void DrawLine(Vector2 a, Vector2 b);
