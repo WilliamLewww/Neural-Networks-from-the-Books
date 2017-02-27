@@ -104,6 +104,7 @@ void Visualiser::Draw() {
 	for (Node node : nodeList) {
 		if (isLinked) {
 			node.SetColor(nodeList, *node.value);
+			std::cout << *node.value << std::endl;
 		}
 		node.Draw();
 	}

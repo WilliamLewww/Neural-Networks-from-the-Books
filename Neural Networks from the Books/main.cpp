@@ -102,10 +102,12 @@ int main(int argc, char *argv[]) {
 		while (perceptron.error > 0.001 || perceptron.error < -0.001) {
 			frameStart = SDL_GetTicks();
 
-			if (timer > 100) {
+			if (timer > 5) {
 				Render(displayWindow, context);
 				if (!perceptron.Run()) { perceptron.Initialize(0); }
-				if (visualiser.isLinked == false) { visualiser.LinkNodes(); visualiser.isLinked = true; }
+				visualiser.LinkNodes();
+				if (visualiser.isLinked == false) { visualiser.isLinked = true; }
+
 				timer = 0.0;
 			}
 
