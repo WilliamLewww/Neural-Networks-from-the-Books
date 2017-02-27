@@ -11,17 +11,17 @@ void Node::SetValue(double* val) {
 }
 
 void Node::SetColor(std::vector<Node> nL, double value) {
-	/*double max = *nL[0].value;
+	double max = *nL[0].value;
 
 	for (int x = 1; x < nL.size(); x++) {
 		if (*nL[x].value > max) { max = *nL[x].value; }
-	}*/
+	}
 
-	/*color[0] = ConvertColor((max / value) * 255);
-	color[1] = ConvertColor((1 - (max / value)) * 255);
-	color[2] = 0;*/
+	color[0] = ConvertColor((value / max) * 255);
+	color[1] = ConvertColor((1 - (value / max)) * 255);
+	color[2] = 0;
 
-	if (value > 0) {
+	/*if (value > 0) {
 		color[0] = ConvertColor(0);
 		color[1] = ConvertColor(255);
 		color[2] = 0;
@@ -30,7 +30,7 @@ void Node::SetColor(std::vector<Node> nL, double value) {
 		color[0] = ConvertColor(255);
 		color[1] = ConvertColor(0);
 		color[2] = 0;
-	}
+	}*/
 }
 
 void Connection::Draw() {
@@ -40,17 +40,17 @@ void Connection::Draw() {
 }
 
 void Connection::SetColor(std::vector<Connection> cL, double value) {
-	/*double max = *cL[0].weight;
+	double max = *cL[0].weight;
 
 	for (int x = 1; x < cL.size(); x++) {
 		if (*cL[x].weight > max) { max = *cL[x].weight; }
 	}
 
-	color[0] = ConvertColor((max / value) * 255);
-	color[1] = ConvertColor((1 - (max / value)) * 255);
-	color[2] = 0;*/
+	color[0] = ConvertColor((value / max) * 255);
+	color[1] = ConvertColor((1 - (value / max)) * 255);
+	color[2] = (color[0] + color[1] / 2);
 
-	if (value > 0) {
+	/*if (value > 0) {
 		color[0] = ConvertColor(0);
 		color[1] = ConvertColor(255);
 		color[2] = 0;
@@ -59,7 +59,7 @@ void Connection::SetColor(std::vector<Connection> cL, double value) {
 		color[0] = ConvertColor(255);
 		color[1] = ConvertColor(0);
 		color[2] = 0;
-	}
+	}*/
 }
 
 void Visualiser::SetPerceptron(PerceptronML* perceptronParam) {
@@ -104,7 +104,6 @@ void Visualiser::Draw() {
 	for (Node node : nodeList) {
 		if (isLinked) {
 			node.SetColor(nodeList, *node.value);
-			std::cout << *node.value << std::endl;
 		}
 		node.Draw();
 	}
