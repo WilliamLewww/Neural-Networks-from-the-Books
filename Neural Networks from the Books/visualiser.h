@@ -47,6 +47,7 @@ public:
 		weight = weightParam;
 	}
 
+	void SetWeight(double*);
 	void SetColor(std::vector<Connection>, double);
 	void Draw();
 };
@@ -61,5 +62,6 @@ public:
 	void SetPerceptron(PerceptronML*);
 	void Initialize();
 	void LinkNodes();
+	void RelinkConnection();
 	void Draw();
 };

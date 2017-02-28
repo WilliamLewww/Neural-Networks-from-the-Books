@@ -33,6 +33,10 @@ void Node::SetColor(std::vector<Node> nL, double value) {
 	}*/
 }
 
+void Connection::SetWeight(double* weightPara) {
+	weight = weightPara;
+}
+
 void Connection::Draw() {
 	DrawLine(pointA, pointB, color);
 	DrawLine(pointA - Vector2(0, 1), pointB - Vector2(0, 1), color);
@@ -46,6 +50,7 @@ void Connection::SetColor(std::vector<Connection> cL, double value) {
 		if (*cL[x].weight > max) { max = *cL[x].weight; }
 	}
 
+	//std::cout << value / max << std::endl;
 	color[0] = ConvertColor((value / max) * 255);
 	color[1] = ConvertColor((1 - (value / max)) * 255);
 	color[2] = (color[0] + color[1] / 2);
@@ -87,6 +92,18 @@ void Visualiser::Initialize() {
 		tempNodeList.clear();
 		tempNodeList = tempNodeList2;
 		tempNodeList2.clear();
+	}
+}
+
+void Visualiser::RelinkConnection() {
+	int iteration = 0;
+	for (int x = 0; x < perceptron->w.size(); x++) {
+		for (int y = 0; y < perceptron->w[x].size(); y++) {
+			for (int z = 0; z < perceptron->w[x][y].size(); z++) {
+				connectionList[iteration].SetWeight(&perceptron->w[x][y][z]);
+				iteration += 1;
+			}
+		}
 	}
 }
 
