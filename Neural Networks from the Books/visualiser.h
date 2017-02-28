@@ -1,5 +1,5 @@
 #pragma once
-#include "multilayer_perceptron_ch11.h"
+#include "multilayer_perceptron.h"
 #include "spritebatch.h"
 #include <vector>
 

@@ -54,18 +54,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="perceptron_network_ch3.cpp">
-      <Filter>Source Files\Chapter 3</Filter>
-    </ClCompile>
-    <ClCompile Include="hopfield_network_ch3.cpp">
-      <Filter>Source Files\Chapter 3</Filter>
-    </ClCompile>
-    <ClCompile Include="hamming_network_ch3.cpp">
-      <Filter>Source Files\Chapter 3</Filter>
-    </ClCompile>
-    <ClCompile Include="perceptron_learning_rule_ch4.cpp">
-      <Filter>Source Files\Chapter 4</Filter>
-    </ClCompile>
     <ClCompile Include="main_c.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -76,9 +64,6 @@
       <Filter>Source Files\Chapter 11\transcribed</Filter>
     </ClCompile>
     <ClCompile Include="visualiser.cpp">
-      <Filter>Source Files\Chapter 11</Filter>
-    </ClCompile>
-    <ClCompile Include="multilayer_perceptron_ch11.cpp">
       <Filter>Source Files\Chapter 11</Filter>
     </ClCompile>
     <ClCompile Include="spritebatch.cpp">
@@ -102,23 +87,23 @@
     <ClCompile Include="Text.txt">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="hamming_network.cpp">
+      <Filter>Source Files\Chapter 3</Filter>
+    </ClCompile>
+    <ClCompile Include="hopfield_network.cpp">
+      <Filter>Source Files\Chapter 3</Filter>
+    </ClCompile>
+    <ClCompile Include="perceptron_network.cpp">
+      <Filter>Source Files\Chapter 3</Filter>
+    </ClCompile>
+    <ClCompile Include="perceptron_learning_rule.cpp">
+      <Filter>Source Files\Chapter 4</Filter>
+    </ClCompile>
+    <ClCompile Include="multilayer_perceptron.cpp">
+      <Filter>Source Files\Chapter 11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="perceptron_network_ch3.h">
-      <Filter>Header Files\Chapter 3</Filter>
-    </ClInclude>
-    <ClInclude Include="hamming_network_ch3.h">
-      <Filter>Header Files\Chapter 3</Filter>
-    </ClInclude>
-    <ClInclude Include="hopfield_network_ch3.h">
-      <Filter>Header Files\Chapter 3</Filter>
-    </ClInclude>
-    <ClInclude Include="perceptron_learning_rule_ch4.h">
-      <Filter>Header Files\Chapter 4</Filter>
-    </ClInclude>
-    <ClInclude Include="multilayer_perceptron_ch11.h">
-      <Filter>Header Files\Chapter 11</Filter>
-    </ClInclude>
     <ClInclude Include="multilayer_perceptron_c.h">
       <Filter>Header Files\Chapter 11\transcribed</Filter>
     </ClInclude>
@@ -157,6 +142,21 @@
     </ClInclude>
     <ClInclude Include="stb_rect_pack.h">
       <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="hamming_network.h">
+      <Filter>Header Files\Chapter 3</Filter>
+    </ClInclude>
+    <ClInclude Include="hopfield_network.h">
+      <Filter>Header Files\Chapter 3</Filter>
+    </ClInclude>
+    <ClInclude Include="perceptron_network.h">
+      <Filter>Header Files\Chapter 3</Filter>
+    </ClInclude>
+    <ClInclude Include="perceptron_learning_rule.h">
+      <Filter>Header Files\Chapter 4</Filter>
+    </ClInclude>
+    <ClInclude Include="multilayer_perceptron.h">
+      <Filter>Header Files\Chapter 11</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

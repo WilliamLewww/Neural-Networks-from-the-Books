@@ -1,8 +1,8 @@
-#include "hamming_network_ch3.h"
-#include "hopfield_network_ch3.h"
-#include "perceptron_network_ch3.h"
-#include "perceptron_learning_rule_ch4.h"
-#include "multilayer_perceptron_ch11.h"
+#include "hamming_network.h"
+#include "hopfield_network.h"
+#include "perceptron_network.h"
+#include "perceptron_learning_rule.h"
+#include "multilayer_perceptron.h"
 #include "global.h"
 #include <math.h>
 #include <iostream>
@@ -150,18 +150,16 @@ PerceptronML perceptron;
 Visualiser visualiser;
 
 bool initial = false;
+bool radio = false, rise = true;
+int iteration = 0;
 float val = 0, step = 50, tempStep = 50;
 int frameStart, frameEnd, deltaTime = 0, timer = 0;
-int main(int, char**)
-{
-    // Setup SDL
-    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
-    {
+int main(int, char**) {
+    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
     }
 
-    // Setup window
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
@@ -173,7 +171,6 @@ int main(int, char**)
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
 	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
 
-    // Setup ImGui binding
     ImGui_ImplSdl_Init(window);
 
 	perceptron.Initialize(0);
@@ -181,32 +178,23 @@ int main(int, char**)
 	visualiser.SetPerceptron(&perceptron);
 	visualiser.Initialize();
 
-    // Load Fonts
-    // (there is a default font, this is only if you want to change it. see extra_fonts/README.txt for more details)
-    //ImGuiIO& io = ImGui::GetIO();
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/Cousine-Regular.ttf", 15.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/DroidSans.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/ProggyClean.ttf", 13.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/ProggyTiny.ttf", 10.0f);
-    //io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
-
-    // Main loop
-    bool done = false;
-    while (!done)
-    {
+    bool running = false;
+    while (!running) {
 		frameStart = SDL_GetTicks();
 
         SDL_Event event;
-        while (SDL_PollEvent(&event))
-        {
+        while (SDL_PollEvent(&event)) {
             ImGui_ImplSdl_ProcessEvent(&event);
             if (event.type == SDL_QUIT)
-                done = true;
+				running = true;
         }
         ImGui_ImplSdl_NewFrame(window);
 
 		if (initial == true) {
+			if (radio == true) {
+				step = tempStep;
+			}
+
 			if (perceptron.error > 0.001 || perceptron.error < -0.001) {
 				if (timer > step) {
 					if (!perceptron.Run()) { perceptron.Initialize(0); visualiser.RelinkConnection(); }
@@ -216,10 +204,21 @@ int main(int, char**)
 					timer = 0;
 				}
 			}
+			else {
+				if (radio == true) {
+					perceptron.FeedInput(iteration);
+					if (iteration > 100) { rise = false; } 
+					if (iteration < 0) { rise = true; }
+					if (rise == true) {
+						iteration += 1;
+					}
+					else {
+						iteration -= 1;
+					}
+				}
+			}
 		}
 
-        // 1. Show a simple window
-        // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
         ImGui::Text("Menu");
 		ImGui::InputFloat("Step", &tempStep);
 		ImGui::InputFloat("Input", &val, 1);
@@ -230,10 +229,15 @@ int main(int, char**)
 			step = tempStep;
 			initial = true;
 		}
+		if (ImGui::Button("Toggle Range")) {
+			perceptron.FeedInput(iteration);
+			step = tempStep;
+			radio = !radio;
+			initial = true;
+		}
 		ImGui::Text("(%1f -> Error)", perceptron.error);
         ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
 
-        // Rendering
 		RenderWindow(window, glcontext);
 
 		frameEnd = SDL_GetTicks();
@@ -241,7 +245,6 @@ int main(int, char**)
 		timer += deltaTime;
     }
 
-    // Cleanup
     ImGui_ImplSdl_Shutdown();
     SDL_GL_DeleteContext(glcontext);
     SDL_DestroyWindow(window);
