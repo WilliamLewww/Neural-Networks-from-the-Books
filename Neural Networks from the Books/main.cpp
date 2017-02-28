@@ -223,12 +223,14 @@ int main(int, char**)
         ImGui::Text("Menu");
 		ImGui::InputFloat("Step", &tempStep);
 		ImGui::InputFloat("Input", &val, 1);
+		ImGui::SetNextWindowSizeConstraints(ImVec2(150, 200), ImVec2(150, 200));
 		ImGui::SetWindowSize(ImVec2(150, 200));
 		if (ImGui::Button("FeedForward")) { 
 			perceptron.FeedInput(val); 
 			step = tempStep;
 			initial = true;
 		}
+		ImGui::Text("(%1f -> Error)", perceptron.error);
         ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
 
         // Rendering
