@@ -39,6 +39,7 @@ public:
 
 	void FeedInput(double input);
 	void Initialize(double input);
+	void Initialize(double input, std::vector<int> weightBias);
 
 	void GenerateWeightBias(int input, int output);
 };

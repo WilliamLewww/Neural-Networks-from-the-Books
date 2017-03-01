@@ -28,6 +28,30 @@ void PerceptronML::FeedInput(double input) {
 	error = 1;
 }
 
+void PerceptronML::Initialize(double input, std::vector<int> weightBias) {
+	srand(time(0));
+
+	w.clear();
+	b.clear();
+	a0 = { { input } };
+
+	for (int x = 0; x < weightBias.size(); x++) {
+		if (x == 0) {
+			GenerateWeightBias(1, weightBias[x]);
+		}
+		else {
+			if (x == weightBias.size() - 1) {
+				GenerateWeightBias(weightBias[x], 1);
+			}
+			else {
+				GenerateWeightBias(weightBias[x - 1], weightBias[x]);
+			}
+		}
+	}
+
+	error = 1;
+}
+
 void PerceptronML::Initialize(double input) {
 	srand(time(0));
 

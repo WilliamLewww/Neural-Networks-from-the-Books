@@ -141,19 +141,37 @@ float ConvertColor(int rgbValue) {
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
+#include <string>
 #include "spritebatch.h"
 #include "visualiser.h"
 
-void RenderWindow(SDL_Window* window, SDL_GLContext context);
+typedef struct PerceptronStruct {
+	PerceptronML perceptron;
+	Visualiser visualiser;
 
-PerceptronML perceptron;
-Visualiser visualiser;
+	std::string name;
 
-bool initial = false;
-bool radio = false, rise = true;
-int iteration = 0;
-float val = 0, step = 50, tempStep = 50;
-int frameStart, frameEnd, deltaTime = 0, timer = 0;
+	PerceptronStruct(std::string namePara) {
+		name = namePara;
+	}
+
+	bool initial = false;
+	bool radio = false, rise = true;
+	int iteration = 0;
+	float val = 0, step = 50, tempStep = 50;
+
+	int timer = 0;
+}PerceptronStruct;
+
+void GeneratePerceptronWindow(PerceptronStruct*);
+void InitializePerceptron(PerceptronStruct*);
+void UpdatePerceptron(double, PerceptronStruct*);
+void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>);
+
+std::vector<PerceptronStruct> perceptronList;
+
+bool running = true;
+int frameStart, frameEnd, deltaTime = 0;
 int main(int, char**) {
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
         printf("Error: %s\n", SDL_GetError());
@@ -172,14 +190,8 @@ int main(int, char**) {
 	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
 
     ImGui_ImplSdl_Init(window);
-
-	perceptron.Initialize(0);
-
-	visualiser.SetPerceptron(&perceptron);
-	visualiser.Initialize();
-
-    bool running = false;
-    while (!running) {
+    
+    while (running) {
 		frameStart = SDL_GetTicks();
 
         SDL_Event event;
@@ -190,59 +202,18 @@ int main(int, char**) {
         }
         ImGui_ImplSdl_NewFrame(window);
 
-		if (initial == true) {
-			if (radio == true) {
-				step = tempStep;
-			}
-
-			if (perceptron.error > 0.001 || perceptron.error < -0.001) {
-				if (timer > step) {
-					if (!perceptron.Run()) { perceptron.Initialize(0); visualiser.RelinkConnection(); }
-					visualiser.LinkNodes();
-					if (visualiser.isLinked == false) { visualiser.isLinked = true; }
-
-					timer = 0;
-				}
-			}
-			else {
-				if (radio == true) {
-					perceptron.FeedInput(iteration);
-					if (iteration > 100) { rise = false; } 
-					if (iteration < 0) { rise = true; }
-					if (rise == true) {
-						iteration += 1;
-					}
-					else {
-						iteration -= 1;
-					}
-				}
-			}
+		ImGui::Text("Main Menu");
+		if (ImGui::Button("Generate")) {
+			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
+			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
 		}
 
-        ImGui::Text("Menu");
-		ImGui::InputFloat("Step", &tempStep);
-		ImGui::InputFloat("Input", &val, 1);
-		ImGui::SetNextWindowSizeConstraints(ImVec2(150, 200), ImVec2(150, 200));
-		ImGui::SetWindowSize(ImVec2(150, 200));
-		if (ImGui::Button("FeedForward")) { 
-			perceptron.FeedInput(val); 
-			step = tempStep;
-			initial = true;
-		}
-		if (ImGui::Button("Toggle Range")) {
-			perceptron.FeedInput(iteration);
-			step = tempStep;
-			radio = !radio;
-			initial = true;
-		}
-		ImGui::Text("(%1f -> Error)", perceptron.error);
-        ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
+		for (PerceptronStruct &perceptron : perceptronList) { UpdatePerceptron(deltaTime, &perceptron); }
 
-		RenderWindow(window, glcontext);
+		RenderWindow(window, glcontext, perceptronList);
 
 		frameEnd = SDL_GetTicks();
 		deltaTime = frameEnd - frameStart;
-		timer += deltaTime;
     }
 
     ImGui_ImplSdl_Shutdown();
@@ -253,13 +224,81 @@ int main(int, char**) {
     return 0;
 }
 
-void RenderWindow(SDL_Window* window, SDL_GLContext context) {
+void InitializePerceptron(PerceptronStruct* ps) {
+	ps->perceptron.Initialize(0);
+
+	ps->visualiser.SetPerceptron(&ps->perceptron);
+	ps->visualiser.Initialize();
+}
+
+void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
+	if (ps->initial == true) {
+		if (ps->radio == true) {
+			ps->step = ps->tempStep;
+		}
+
+		if (ps->perceptron.error > 0.001 || ps->perceptron.error < -0.001) {
+			if (ps->timer > ps->step) {
+				if (!ps->perceptron.Run()) { ps->perceptron.Initialize(0); ps->visualiser.RelinkConnection(); }
+				ps->visualiser.LinkNodes();
+				if (ps->visualiser.isLinked == false) { ps->visualiser.isLinked = true; }
+
+				ps->timer = 0;
+			}
+		}
+		else {
+			if (ps->radio == true) {
+				ps->perceptron.FeedInput(ps->iteration);
+				if (ps->iteration > 100) { ps->rise = false; }
+				if (ps->iteration < 0) { ps->rise = true; }
+				if (ps->rise == true) {
+					ps->iteration += 1;
+				}
+				else {
+					ps->iteration -= 1;
+				}
+			}
+		}
+	}
+
+	GeneratePerceptronWindow(ps);
+
+	ps->timer += dTime;
+}
+
+void GeneratePerceptronWindow(PerceptronStruct* ps) {
+	ImGui::SetNextWindowSize(ImVec2(200, 100), ImGuiSetCond_FirstUseEver);
+	ImGui::Begin(ps->name.c_str());
+	ImGui::Text("Perceptron Menu");
+	ImGui::InputFloat("Step", &ps->tempStep);
+	ImGui::InputFloat("Input", &ps->val, 1);
+	ImGui::SetNextWindowSizeConstraints(ImVec2(150, 200), ImVec2(150, 200));
+	ImGui::SetWindowSize(ImVec2(150, 200));
+	if (ImGui::Button("FeedForward")) {
+		ps->perceptron.FeedInput(ps->val);
+		ps->step = ps->tempStep;
+		ps->initial = true;
+	}
+	if (ImGui::Button("Toggle Range")) {
+		ps->perceptron.FeedInput(ps->iteration);
+		ps->step = ps->tempStep;
+		ps->radio = !ps->radio;
+		ps->initial = true;
+	}
+	ImGui::Text("(%1f -> Error)", ps->perceptron.error);
+	ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
+	ImGui::End();
+}
+
+void RenderWindow(SDL_Window* window, SDL_GLContext context, std::vector<PerceptronStruct> perceptronList) {
 	SDL_GL_MakeCurrent(window, context);
 	glClearColor(ConvertColor(69), ConvertColor(177), ConvertColor(237), 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 
-	visualiser.Draw();
+	for (PerceptronStruct perceptron : perceptronList) {
+		perceptron.visualiser.Draw();
+	}
 
 	ImGui::Render();
 
