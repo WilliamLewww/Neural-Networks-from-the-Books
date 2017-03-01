@@ -142,6 +142,7 @@ float ConvertColor(int rgbValue) {
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <string>
+#include <math.h>
 #include "spritebatch.h"
 #include "visualiser.h"
 
@@ -151,9 +152,8 @@ typedef struct PerceptronStruct {
 
 	std::string name;
 
-	PerceptronStruct(std::string namePara) {
-		name = namePara;
-	}
+	PerceptronStruct(std::string namePara) { name = namePara; }
+	PerceptronStruct(std::string namePara, Vector2 pos) { name = namePara; visualiser.SetPosition(pos); }
 
 	bool initial = false;
 	bool radio = false, rise = true;
@@ -203,7 +203,7 @@ int main(int, char**) {
         ImGui_ImplSdl_NewFrame(window);
 
 		ImGui::Text("Main Menu");
-		if (ImGui::Button("Generate")) {
+		if (ImGui::Button("Generate Example")) {
 			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
 		}
@@ -267,10 +267,10 @@ void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
 }
 
 void GeneratePerceptronWindow(PerceptronStruct* ps) {
-	ImGui::SetNextWindowSize(ImVec2(200, 100), ImGuiSetCond_FirstUseEver);
-	ImGui::Begin(ps->name.c_str());
+	ImGui::SetNextWindowSize(ImVec2(150, 200), ImGuiSetCond_FirstUseEver);
+	ImGui::Begin(("Network #" + ps->name).c_str());
 	ImGui::Text("Perceptron Menu");
-	ImGui::InputFloat("Step", &ps->tempStep);
+	ImGui::InputFloat("Delay", &ps->tempStep);
 	ImGui::InputFloat("Input", &ps->val, 1);
 	ImGui::SetNextWindowSizeConstraints(ImVec2(150, 200), ImVec2(150, 200));
 	ImGui::SetWindowSize(ImVec2(150, 200));

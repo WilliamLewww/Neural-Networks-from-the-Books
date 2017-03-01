@@ -57,8 +57,11 @@ class Visualiser {
 	std::vector<Connection> connectionList;
 	PerceptronML* perceptron;
 public:
+	Vector2 position;
+
 	bool isLinked = false;
 
+	void SetPosition(Vector2);
 	void SetPerceptron(PerceptronML*);
 	void Initialize();
 	void LinkNodes();

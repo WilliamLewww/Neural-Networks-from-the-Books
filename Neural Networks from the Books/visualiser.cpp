@@ -74,12 +74,12 @@ void Visualiser::SetPerceptron(PerceptronML* perceptronParam) {
 void Visualiser::Initialize() {
 	std::vector<Node> tempNodeList;
 	std::vector<Node> tempNodeList2;
-	nodeList.push_back(Node(Vector2(100, (SCREENHEIGHT / 4) * 2), 25));
+	nodeList.push_back(Node(Vector2(100, (SCREENHEIGHT / 4) * 2) + position, 25));
 	tempNodeList.push_back(nodeList[0]);
 
 	for (int x = 0; x < perceptron->b.size(); x++) {
 		for (int y = 0; y < perceptron->b[x].size(); y++) {
-			nodeList.push_back(Node(Vector2((SCREENWIDTH / (perceptron->b.size() + 1)) * (x + 1) + 100, (y + 1) * ((SCREENHEIGHT / 2) / (perceptron->b[x].size() + 1)) + (SCREENHEIGHT / 4)), 25));
+			nodeList.push_back(Node(Vector2((SCREENWIDTH / (perceptron->b.size() + 1)) * (x + 1) + 100, (y + 1) * ((SCREENHEIGHT / 2) / (perceptron->b[x].size() + 1)) + (SCREENHEIGHT / 4)) + position, 25));
 			tempNodeList2.push_back(nodeList[nodeList.size() - 1]);
 		}
 
@@ -105,6 +105,10 @@ void Visualiser::RelinkConnection() {
 			}
 		}
 	}
+}
+
+void Visualiser::SetPosition(Vector2 pos) {
+	position = pos;
 }
 
 void Visualiser::LinkNodes() {
