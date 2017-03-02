@@ -41,6 +41,7 @@ void PerceptronML::Initialize(double input, std::vector<int> weightBias) {
 		}
 		else {
 			if (x == weightBias.size() - 1) {
+				GenerateWeightBias(weightBias[x - 1], weightBias[x]);
 				GenerateWeightBias(weightBias[x], 1);
 			}
 			else {

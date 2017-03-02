@@ -151,6 +151,13 @@ void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>);
 
 std::vector<PerceptronStruct> perceptronList;
 
+std::vector<const char*> layerList;
+std::vector<int> neuronList;
+const char** layerListArray;
+int currentLayer = 0;
+
+bool showCustomGeneration = false;
+
 bool running = true;
 int frameStart, frameEnd, deltaTime = 0;
 int main(int, char**) {
@@ -187,6 +194,35 @@ int main(int, char**) {
 		if (ImGui::Button("Generate Example")) {
 			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
+		}
+
+		if (ImGui::Button("Generate")) {
+			showCustomGeneration = !showCustomGeneration;
+		}
+
+		if (showCustomGeneration) {
+			ImGui::Begin("Custom Network");
+			ImGui::SetWindowSize(ImVec2(400, 400));
+			if (ImGui::Button("Add Layer")) { 
+				layerList.push_back("New Layer"); 
+				neuronList.push_back(0);
+			}
+			if (layerList.size() > 0) { layerListArray = (const char**)&layerList[0];  }
+			ImGui::ListBox("", &currentLayer, layerListArray, layerList.size(), 10);
+			if (layerList.size() > 0) {
+				ImGui::InputInt("# of Neurons", &neuronList[currentLayer], 1);
+			}
+
+			if (ImGui::Button("Create")) {
+				perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
+				InitializePerceptron(&perceptronList[perceptronList.size() - 1], neuronList);
+
+				layerList.clear();
+				neuronList.clear();
+				currentLayer = 0;
+				showCustomGeneration = false;
+			}
+			ImGui::End();
 		}
 
 		for (PerceptronStruct &perceptron : perceptronList) { UpdatePerceptron(deltaTime, &perceptron); }

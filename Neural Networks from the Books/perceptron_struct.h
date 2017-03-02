@@ -21,4 +21,5 @@ typedef struct PerceptronStruct {
 
 void GeneratePerceptronWindow(PerceptronStruct*);
 void InitializePerceptron(PerceptronStruct*);
+void InitializePerceptron(PerceptronStruct*, std::vector<int>);
 void UpdatePerceptron(double, PerceptronStruct*);

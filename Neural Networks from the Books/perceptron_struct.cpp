@@ -10,6 +10,14 @@ void InitializePerceptron(PerceptronStruct* ps) {
 	ps->visualiser.Initialize();
 }
 
+void InitializePerceptron(PerceptronStruct* ps, std::vector<int> weightBias) {
+	ps->perceptron.Initialize(0, weightBias);
+
+	ps->visualiser.SetPerceptron(&ps->perceptron);
+	ps->visualiser.LinkNodes();
+	ps->visualiser.Initialize();
+}
+
 void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
 	if (ps->initial == true) {
 		if (ps->radio == true) {
@@ -46,12 +54,10 @@ void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
 }
 
 void GeneratePerceptronWindow(PerceptronStruct* ps) {
-	ImGui::SetNextWindowSize(ImVec2(150, 200), ImGuiSetCond_FirstUseEver);
 	ImGui::Begin(("Network #" + ps->name).c_str());
 	ImGui::Text("Perceptron Menu");
 	ImGui::InputFloat("Delay", &ps->tempStep);
 	ImGui::InputFloat("Input", &ps->val, 1);
-	ImGui::SetNextWindowSizeConstraints(ImVec2(150, 200), ImVec2(150, 200));
 	ImGui::SetWindowSize(ImVec2(150, 200));
 	if (ImGui::Button("FeedForward")) {
 		ps->perceptron.FeedInput(ps->val);
