@@ -102,6 +102,9 @@
     <ClCompile Include="multilayer_perceptron.cpp">
       <Filter>Source Files\Chapter 11</Filter>
     </ClCompile>
+    <ClCompile Include="perceptron_struct.cpp">
+      <Filter>Source Files\Chapter 11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="multilayer_perceptron_c.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files\Chapter 4</Filter>
     </ClInclude>
     <ClInclude Include="multilayer_perceptron.h">
+      <Filter>Header Files\Chapter 11</Filter>
+    </ClInclude>
+    <ClInclude Include="perceptron_struct.h">
       <Filter>Header Files\Chapter 11</Filter>
     </ClInclude>
   </ItemGroup>

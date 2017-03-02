@@ -129,6 +129,7 @@
     <ClCompile Include="multilayer_perceptron.cpp" />
     <ClCompile Include="perceptron_learning_rule.cpp" />
     <ClCompile Include="perceptron_network.cpp" />
+    <ClCompile Include="perceptron_struct.cpp" />
     <ClCompile Include="spritebatch.cpp" />
     <ClCompile Include="Text.txt" />
     <ClCompile Include="vector2.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="imgui_internal.h" />
     <ClInclude Include="multilayer_perceptron_c.h" />
     <ClInclude Include="multilayer_perceptron.h" />
+    <ClInclude Include="perceptron_struct.h" />
     <ClInclude Include="perceptron_learning_rule.h" />
     <ClInclude Include="perceptron_network.h" />
     <ClInclude Include="spritebatch.h" />
