@@ -337,5 +337,5 @@ double PerceptronML::DActivation(int function, double value) {
 }
 
 double PerceptronML::OriginalFunction(double value) {
-	return 1 + tan((PI / 4) * value);
+	return 1 + sin((PI / 4) * value);
 }

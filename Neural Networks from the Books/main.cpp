@@ -228,6 +228,7 @@ void InitializePerceptron(PerceptronStruct* ps) {
 	ps->perceptron.Initialize(0);
 
 	ps->visualiser.SetPerceptron(&ps->perceptron);
+	ps->visualiser.LinkNodes();
 	ps->visualiser.Initialize();
 }
 
