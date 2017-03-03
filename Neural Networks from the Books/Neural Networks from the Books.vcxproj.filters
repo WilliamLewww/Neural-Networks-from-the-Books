@@ -105,6 +105,12 @@
     <ClCompile Include="perceptron_struct.cpp">
       <Filter>Source Files\Chapter 11</Filter>
     </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="multilayer_perceptron_c.h">
@@ -163,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="perceptron_struct.h">
       <Filter>Header Files\Chapter 11</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

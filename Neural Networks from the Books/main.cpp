@@ -145,9 +145,11 @@ float ConvertColor(int rgbValue) {
 #include <math.h>
 #include "spritebatch.h"
 #include "visualiser.h"
+#include "input.h"
 #include "perceptron_struct.h"
+#include "camera.h"
 
-void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>);
+void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>, Camera);
 
 std::vector<PerceptronStruct> perceptronList;
 
@@ -155,6 +157,8 @@ std::vector<const char*> layerList;
 std::vector<int> neuronList;
 const char** layerListArray;
 int currentLayer = 0;
+
+SDL_Renderer* renderer;
 
 bool showCustomGeneration = false;
 
@@ -166,6 +170,8 @@ int main(int, char**) {
         return -1;
     }
 
+	Camera camera = Camera(Vector2(0, 0), 1, 1);
+
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
@@ -175,7 +181,8 @@ int main(int, char**) {
     SDL_GetCurrentDisplayMode(0, &current);
     SDL_Window *window = SDL_CreateWindow("Net Visualiser", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL);
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
-	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
+	glOrtho(-SCREENWIDTH, SCREENWIDTH, SCREENHEIGHT, -SCREENHEIGHT, 0, 1);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     ImGui_ImplSdl_Init(window);
     
@@ -183,12 +190,19 @@ int main(int, char**) {
 		frameStart = SDL_GetTicks();
 
         SDL_Event event;
+		RemoveInitialPress();
+		leftButtonPress = false;
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSdl_ProcessEvent(&event);
             if (event.type == SDL_QUIT)
-				running = true;
+				running = false;
+
+			GetKeys(event);
+			GetButtons(event);
         }
         ImGui_ImplSdl_NewFrame(window);
+
+		UpdateCamera(&camera);
 
 		ImGui::Text("Main Menu");
 		if (ImGui::Button("Generate Example")) {
@@ -226,12 +240,11 @@ int main(int, char**) {
 		}
 
 		for (PerceptronStruct &perceptron : perceptronList) { UpdatePerceptron(deltaTime, &perceptron); }
-		RenderWindow(window, glcontext, perceptronList);
+		RenderWindow(window, glcontext, perceptronList, camera);
 
 		frameEnd = SDL_GetTicks();
 		deltaTime = frameEnd - frameStart;
     }
-
     ImGui_ImplSdl_Shutdown();
     SDL_GL_DeleteContext(glcontext);
     SDL_DestroyWindow(window);
@@ -240,11 +253,15 @@ int main(int, char**) {
     return 0;
 }
 
-void RenderWindow(SDL_Window* window, SDL_GLContext context, std::vector<PerceptronStruct> perceptronList) {
+void RenderWindow(SDL_Window* window, SDL_GLContext context, std::vector<PerceptronStruct> perceptronList, Camera camera) {
 	SDL_GL_MakeCurrent(window, context);
 	glClearColor(ConvertColor(69), ConvertColor(177), ConvertColor(237), 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	glTranslatef(camera.position.x, camera.position.y, 0);
+	glScalef(camera.scale.x, camera.scale.y, 0);
 
 	for (PerceptronStruct perceptron : perceptronList) {
 		perceptron.visualiser.Draw();

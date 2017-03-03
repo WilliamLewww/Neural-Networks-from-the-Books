@@ -118,12 +118,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="hamming_network.cpp" />
     <ClCompile Include="hopfield_network.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_sdl.cpp" />
+    <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_c.c" />
     <ClCompile Include="multilayer_perceptron_c.c" />
@@ -138,6 +140,7 @@
     <ClCompile Include="visualiser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="hamming_network.h" />
     <ClInclude Include="hopfield_network.h" />
@@ -145,6 +148,7 @@
     <ClInclude Include="imgui.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
     <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="multilayer_perceptron_c.h" />
     <ClInclude Include="multilayer_perceptron.h" />
     <ClInclude Include="perceptron_struct.h" />
