@@ -6,6 +6,7 @@ public:
 
 	Vector2();
 	Vector2(double xArgs, double yArgs);
+	Vector2 Get();
 	Vector2 Normalize();
 	Vector2 Abs();
 	Vector2 operator*(Vector2 vector);

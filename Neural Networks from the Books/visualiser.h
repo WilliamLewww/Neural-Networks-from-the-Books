@@ -24,7 +24,7 @@ public:
 
 	void SetValue(double*);
 	void SetColor(std::vector<Node>, double);
-	void Draw();
+	void Draw(Vector2);
 };
 
 struct Connection {
@@ -34,29 +34,37 @@ public:
 	Node* nodeA;
 	Node* nodeB;
 
-	Vector2 pointA;
-	Vector2 pointB;
+	Vector2* pointA;
+	Vector2* pointB;
+
+	Connection(Node* nodeAParam, Node* nodeBParam) {
+		nodeA = nodeAParam;
+		nodeB = nodeBParam;
+
+		pointA = &nodeAParam->position;
+		pointB = &nodeBParam->position;
+	}
 
 	Connection(Node* nodeAParam, Node* nodeBParam, double* weightParam) {
 		nodeA = nodeAParam;
 		nodeB = nodeBParam;
 
-		pointA = nodeA->position;
-		pointB = nodeB->position;
+		pointA = &nodeAParam->position;
+		pointB = &nodeBParam->position;
 
 		weight = weightParam;
 	}
 
 	void SetWeight(double*);
 	void SetColor(std::vector<Connection>, double);
-	void Draw();
+	void Draw(Vector2);
 };
 
 class Visualiser {
-	std::vector<Node> nodeList;
 	std::vector<Connection> connectionList;
 	PerceptronML* perceptron;
 public:
+	std::vector<Node> nodeList;
 	Vector2 position;
 
 	bool isLinked = false;

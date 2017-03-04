@@ -153,6 +153,10 @@ void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>, Cam
 
 std::vector<PerceptronStruct> perceptronList;
 
+PerceptronStruct* selectedPerceptron;
+Vector2 tempMouse;
+bool clickOnSelected = false;
+
 std::vector<const char*> layerList;
 std::vector<int> neuronList;
 const char** layerListArray;
@@ -181,7 +185,7 @@ int main(int, char**) {
     SDL_GetCurrentDisplayMode(0, &current);
     SDL_Window *window = SDL_CreateWindow("Net Visualiser", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL);
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
-	glOrtho(-SCREENWIDTH, SCREENWIDTH, SCREENHEIGHT, -SCREENHEIGHT, 0, 1);
+	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     ImGui_ImplSdl_Init(window);
@@ -208,10 +212,44 @@ int main(int, char**) {
 		if (ImGui::Button("Generate Example")) {
 			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
+			selectedPerceptron = &perceptronList[perceptronList.size() - 1];
 		}
 
 		if (ImGui::Button("Generate")) {
 			showCustomGeneration = !showCustomGeneration;
+		}
+
+		if (selectedPerceptron != nullptr) {
+			ImGui::Begin("Selected Network");
+			ImGui::SetWindowSize(ImVec2(400, 400));
+			ImGui::Text("(%.1f, %.1f)", selectedPerceptron->visualiser.nodeList[0].position.x, selectedPerceptron->visualiser.nodeList[0].position.y);
+			ImGui::End();
+
+			if (clickOnSelected == false) {
+				if (leftButtonDown == true) {
+					for (Node node : selectedPerceptron->visualiser.nodeList) {
+						if (mouseX < node.position.x + node.radius &&
+							mouseX > node.position.x - node.radius &&
+							mouseY < node.position.y + node.radius &&
+							mouseY > node.position.y - node.radius) {
+							tempMouse = Vector2(mouseX, mouseY);
+							clickOnSelected = true;
+						}
+					}
+				}
+				else {
+					clickOnSelected = false;
+				}
+			}
+
+			if (clickOnSelected == true) {
+				selectedPerceptron->visualiser.position = Vector2(mouseX, mouseY) - tempMouse;
+				if (leftButtonDown == false) {
+					selectedPerceptron->visualiser.position = Vector2(0, 0);
+					selectedPerceptron->visualiser.SetPosition(Vector2(mouseX, mouseY) - tempMouse);
+					clickOnSelected = false;
+				}
+			}
 		}
 
 		if (showCustomGeneration) {
@@ -230,6 +268,7 @@ int main(int, char**) {
 			if (ImGui::Button("Create")) {
 				perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 				InitializePerceptron(&perceptronList[perceptronList.size() - 1], neuronList);
+				selectedPerceptron = &perceptronList[perceptronList.size() - 1];
 
 				layerList.clear();
 				neuronList.clear();

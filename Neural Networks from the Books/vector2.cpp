@@ -10,6 +10,10 @@ Vector2::Vector2(double xArgs, double yArgs) {
 	y = yArgs;
 }
 
+Vector2 Vector2::Get() {
+	return Vector2(x, y);
+}
+
 Vector2 Vector2::Abs() {
 	x = abs(x);
 	y = abs(y);
