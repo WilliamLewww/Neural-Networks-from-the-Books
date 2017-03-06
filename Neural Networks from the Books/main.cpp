@@ -209,7 +209,7 @@ int main(int, char**) {
         }
         ImGui_ImplSdl_NewFrame(window);
 
-		UpdateCamera(&camera);
+		UpdateCamera(&camera, deltaTime);
 
 		ImGui::Text("Main Menu");
 		ImGui::SetWindowSize(ImVec2(150, 200));
@@ -229,17 +229,22 @@ int main(int, char**) {
 			ImGui::SetWindowSize(ImVec2(400, 400));
 			ImGui::Text("(%.1f, %.1f)", selectedPerceptron->visualiser.nodeList[0].position.x, selectedPerceptron->visualiser.nodeList[0].position.y);
 			ImGui::Text("(%.1f, %.1f)", camera.RelativeMouse().x, camera.RelativeMouse().y);
+			ImGui::Text("(%.1f, %.1f)", camera.scale.x, camera.scale.y);
 			ImGui::End();
 
 			if (clickOnSelected == false) {
 				if (leftButtonDown == true) {
-					for (Node node : selectedPerceptron->visualiser.nodeList) {
-						if (camera.RelativeMouse().x < node.position.x + node.radius &&
-							camera.RelativeMouse().x > node.position.x - node.radius &&
-							camera.RelativeMouse().y < node.position.y + node.radius &&
-							camera.RelativeMouse().y > node.position.y - node.radius) {
-							tempMouse = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y);
-							clickOnSelected = true;
+					
+					for (PerceptronStruct& perceptron : perceptronList) {
+						for (Node& node : perceptron.visualiser.nodeList) {
+							if (camera.RelativeMouse().x < node.position.x + node.radius &&
+								camera.RelativeMouse().x > node.position.x - node.radius &&
+								camera.RelativeMouse().y < node.position.y + node.radius &&
+								camera.RelativeMouse().y > node.position.y - node.radius) {
+								tempMouse = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y);
+								selectedPerceptron = &perceptron;
+								clickOnSelected = true;
+							}
 						}
 					}
 				}
@@ -308,8 +313,8 @@ void RenderWindow(SDL_Window* window, SDL_GLContext context, std::vector<Percept
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	glTranslatef(camera.position.x, camera.position.y, 0);
 	glScalef(camera.scale.x, camera.scale.y, 0);
+	glTranslatef(camera.position.x, camera.position.y, 0);
 
 	for (int x = 0; x < perceptronSize; x++) {
 		perceptronList[x].visualiser.Draw();

@@ -8,7 +8,10 @@ struct Camera {
 	Vector2 scale;
 
 	Vector2 RelativeMouse() {
-		return Vector2(mouseX - position.x * (SCREENWIDTH / 2), mouseY + position.y * (SCREENHEIGHT / 2));
+		return Vector2(
+			(mouseX - position.x * (SCREENWIDTH / 2)), 
+			(mouseY + position.y * (SCREENHEIGHT / 2))
+		);
 	}
 
 	Camera(Vector2 pos, float scaleX, float scaleY) {
@@ -17,4 +20,4 @@ struct Camera {
 	}
 };
 
-void UpdateCamera(Camera*);
+void UpdateCamera(Camera*, double);
