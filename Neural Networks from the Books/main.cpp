@@ -228,16 +228,17 @@ int main(int, char**) {
 			ImGui::Begin("Selected Network");
 			ImGui::SetWindowSize(ImVec2(400, 400));
 			ImGui::Text("(%.1f, %.1f)", selectedPerceptron->visualiser.nodeList[0].position.x, selectedPerceptron->visualiser.nodeList[0].position.y);
+			ImGui::Text("(%.1f, %.1f)", camera.RelativeMouse().x, camera.RelativeMouse().y);
 			ImGui::End();
 
 			if (clickOnSelected == false) {
 				if (leftButtonDown == true) {
 					for (Node node : selectedPerceptron->visualiser.nodeList) {
-						if (mouseX < node.position.x + node.radius &&
-							mouseX > node.position.x - node.radius &&
-							mouseY < node.position.y + node.radius &&
-							mouseY > node.position.y - node.radius) {
-							tempMouse = Vector2(mouseX, mouseY);
+						if (camera.RelativeMouse().x < node.position.x + node.radius &&
+							camera.RelativeMouse().x > node.position.x - node.radius &&
+							camera.RelativeMouse().y < node.position.y + node.radius &&
+							camera.RelativeMouse().y > node.position.y - node.radius) {
+							tempMouse = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y);
 							clickOnSelected = true;
 						}
 					}
@@ -248,10 +249,10 @@ int main(int, char**) {
 			}
 
 			if (clickOnSelected == true) {
-				selectedPerceptron->visualiser.position = Vector2(mouseX, mouseY) - tempMouse;
+				selectedPerceptron->visualiser.position = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse;
 				if (leftButtonDown == false) {
 					selectedPerceptron->visualiser.position = Vector2(0, 0);
-					selectedPerceptron->visualiser.SetPosition(Vector2(mouseX, mouseY) - tempMouse);
+					selectedPerceptron->visualiser.SetPosition(Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse);
 					clickOnSelected = false;
 				}
 			}
@@ -271,9 +272,10 @@ int main(int, char**) {
 			}
 
 			if (ImGui::Button("Create")) {
-				perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
-				InitializePerceptron(&perceptronList[perceptronList.size() - 1], neuronList);
-				selectedPerceptron = &perceptronList[perceptronList.size() - 1];
+				perceptronList[perceptronSize] = (PerceptronStruct(std::to_string(perceptronSize)));
+				perceptronSize += 1;
+				InitializePerceptron(&perceptronList[perceptronSize - 1], neuronList);
+				selectedPerceptron = &perceptronList[perceptronSize - 1];
 
 				layerList.clear();
 				neuronList.clear();
