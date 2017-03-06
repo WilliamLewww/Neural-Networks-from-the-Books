@@ -152,6 +152,7 @@ float ConvertColor(int rgbValue) {
 void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>, Camera);
 
 std::vector<PerceptronStruct> perceptronList;
+int perceptronSize = 0;
 
 PerceptronStruct* selectedPerceptron;
 Vector2 tempMouse;
@@ -169,6 +170,8 @@ bool showCustomGeneration = false;
 bool running = true;
 int frameStart, frameEnd, deltaTime = 0;
 int main(int, char**) {
+	perceptronList.resize(10);
+
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
@@ -189,7 +192,7 @@ int main(int, char**) {
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     ImGui_ImplSdl_Init(window);
-    
+
     while (running) {
 		frameStart = SDL_GetTicks();
 
@@ -209,10 +212,12 @@ int main(int, char**) {
 		UpdateCamera(&camera);
 
 		ImGui::Text("Main Menu");
+		ImGui::SetWindowSize(ImVec2(150, 200));
 		if (ImGui::Button("Generate Example")) {
-			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
-			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
-			selectedPerceptron = &perceptronList[perceptronList.size() - 1];
+			perceptronList[perceptronSize] = (PerceptronStruct(std::to_string(perceptronSize)));
+			perceptronSize += 1;
+			InitializePerceptron(&perceptronList[perceptronSize - 1]);
+			selectedPerceptron = &perceptronList[perceptronSize - 1];
 		}
 
 		if (ImGui::Button("Generate")) {
@@ -278,7 +283,9 @@ int main(int, char**) {
 			ImGui::End();
 		}
 
-		for (PerceptronStruct &perceptron : perceptronList) { UpdatePerceptron(deltaTime, &perceptron); }
+		for (int x = 0; x < perceptronSize; x++) {
+			UpdatePerceptron(deltaTime, &perceptronList[x]); 
+		}
 		RenderWindow(window, glcontext, perceptronList, camera);
 
 		frameEnd = SDL_GetTicks();
@@ -302,8 +309,8 @@ void RenderWindow(SDL_Window* window, SDL_GLContext context, std::vector<Percept
 	glTranslatef(camera.position.x, camera.position.y, 0);
 	glScalef(camera.scale.x, camera.scale.y, 0);
 
-	for (PerceptronStruct perceptron : perceptronList) {
-		perceptron.visualiser.Draw();
+	for (int x = 0; x < perceptronSize; x++) {
+		perceptronList[x].visualiser.Draw();
 	}
 
 	ImGui::Render();

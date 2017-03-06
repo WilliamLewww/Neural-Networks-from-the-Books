@@ -125,7 +125,7 @@ bool PerceptronML::Run() {
 
 	//std::cout << floor(error * 10000 + 0.5) / 10000 << std::endl;
 	//std::cout << b[0][0] << ":" <<error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
-	std::cout << error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
+	//std::cout << error << "||" << a[a.size() - 1][0][0] << ":" << OriginalFunction(a0[0][0]) << std::endl;
 
 	return (isnormal(error) && !isnan(error));
 }

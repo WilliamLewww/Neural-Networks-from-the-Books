@@ -2,20 +2,67 @@
 #include "imgui_impl_sdl.h"
 #include "perceptron_struct.h"
 
+void PerceptronClass::InitializePerceptron() {
+	perceptron.Initialize(0);
+
+	visualiser.SetPerceptron(&perceptron);
+	visualiser.Initialize();
+}
+
 void InitializePerceptron(PerceptronStruct* ps) {
 	ps->perceptron.Initialize(0);
 
 	ps->visualiser.SetPerceptron(&ps->perceptron);
-	ps->visualiser.LinkNodes();
 	ps->visualiser.Initialize();
+}
+
+void PerceptronClass::InitializePerceptron(std::vector<int> weightBias) {
+	perceptron.Initialize(0, weightBias);
+
+	visualiser.SetPerceptron(&perceptron);
+	visualiser.Initialize();
 }
 
 void InitializePerceptron(PerceptronStruct* ps, std::vector<int> weightBias) {
 	ps->perceptron.Initialize(0, weightBias);
 
 	ps->visualiser.SetPerceptron(&ps->perceptron);
-	ps->visualiser.LinkNodes();
 	ps->visualiser.Initialize();
+}
+
+void PerceptronClass::UpdatePerceptron(double dTime) {
+	if (initial == true) {
+		if (radio == true) {
+			step = tempStep;
+		}
+
+		if (perceptron.error > 0.001 || perceptron.error < -0.001) {
+			if (timer > step) {
+				if (!perceptron.Run()) { perceptron.Initialize(0); visualiser.RelinkConnection(); }
+				visualiser.LinkNodes();
+				if (visualiser.isLinked == false) { visualiser.isLinked = true; }
+
+				timer = 0;
+			}
+		}
+		else {
+			if (radio == true) {
+				perceptron.FeedInput(iteration);
+				if (iteration > 100) { rise = false; }
+				if (iteration < 0) { rise = true; }
+				if (rise == true) {
+					iteration += 1;
+				}
+				else {
+					iteration -= 1;
+				}
+			}
+		}
+	}
+
+	GeneratePerceptronWindow();
+
+	timer += dTime;
 }
 
 void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
@@ -51,6 +98,28 @@ void UpdatePerceptron(double dTime, PerceptronStruct* ps) {
 	GeneratePerceptronWindow(ps);
 
 	ps->timer += dTime;
+}
+
+void PerceptronClass::GeneratePerceptronWindow() {
+	ImGui::Begin(("Network #" + name).c_str());
+	ImGui::Text("Perceptron Menu");
+	ImGui::InputFloat("Delay", &tempStep);
+	ImGui::InputFloat("Input", &val, 1);
+	ImGui::SetWindowSize(ImVec2(150, 200));
+	if (ImGui::Button("FeedForward")) {
+		perceptron.FeedInput(val);
+		step = tempStep;
+		initial = true;
+	}
+	if (ImGui::Button("Toggle Range")) {
+		perceptron.FeedInput(iteration);
+		step = tempStep;
+		radio = !radio;
+		initial = true;
+	}
+	ImGui::Text("(%1f -> Error)", perceptron.error);
+	ImGui::Text("(%.1f FPS)", ImGui::GetIO().Framerate);
+	ImGui::End();
 }
 
 void GeneratePerceptronWindow(PerceptronStruct* ps) {
