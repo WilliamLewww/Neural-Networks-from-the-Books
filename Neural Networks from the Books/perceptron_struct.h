@@ -38,6 +38,7 @@ typedef struct PerceptronStruct {
 	bool initial = false;
 	bool radio = false, rise = true;
 	int iteration = 0;
+	float rate = 0.1;
 	float val = 0, step = 50, tempStep = 50;
 
 	int timer = 0;

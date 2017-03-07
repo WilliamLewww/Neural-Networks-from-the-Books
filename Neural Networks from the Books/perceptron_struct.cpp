@@ -105,7 +105,7 @@ void PerceptronClass::GeneratePerceptronWindow() {
 	ImGui::Text("Perceptron Menu");
 	ImGui::InputFloat("Delay", &tempStep);
 	ImGui::InputFloat("Input", &val, 1);
-	ImGui::SetWindowSize(ImVec2(150, 200));
+	ImGui::SetWindowSize(ImVec2(155, 200));
 	if (ImGui::Button("FeedForward")) {
 		perceptron.FeedInput(val);
 		step = tempStep;
@@ -127,14 +127,27 @@ void GeneratePerceptronWindow(PerceptronStruct* ps) {
 	ImGui::Text("Perceptron Menu");
 	ImGui::InputFloat("Delay", &ps->tempStep);
 	ImGui::InputFloat("Input", &ps->val, 1);
-	ImGui::SetWindowSize(ImVec2(150, 200));
+	ImGui::InputFloat("L-Rate", &ps->rate, .01);
+	ImGui::SetWindowSize(ImVec2(175, 200));
 	if (ImGui::Button("FeedForward")) {
 		ps->perceptron.FeedInput(ps->val);
+		ps->perceptron.FeedLearningRate(ps->rate);
 		ps->step = ps->tempStep;
 		ps->initial = true;
 	}
+	ImGui::SameLine();
+	if (ImGui::Button("Reset")) {
+		ps->perceptron.FeedInput(ps->iteration);
+		ps->perceptron.FeedLearningRate(ps->rate);
+		ps->step = ps->tempStep;
+		ps->radio = false;
+		ps->initial = false;
+		ps->perceptron.Initialize(0);
+		ps->visualiser.RelinkConnection();
+	}
 	if (ImGui::Button("Toggle Range")) {
 		ps->perceptron.FeedInput(ps->iteration);
+		ps->perceptron.FeedLearningRate(ps->rate);
 		ps->step = ps->tempStep;
 		ps->radio = !ps->radio;
 		ps->initial = true;

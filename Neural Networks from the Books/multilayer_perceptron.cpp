@@ -28,6 +28,10 @@ void PerceptronML::FeedInput(double input) {
 	error = 1;
 }
 
+void PerceptronML::FeedLearningRate(double rate) {
+	learningRate = rate;
+}
+
 void PerceptronML::Initialize(double input, std::vector<int> weightBias) {
 	srand(time(0));
 

@@ -154,6 +154,7 @@ void RenderWindow(SDL_Window*, SDL_GLContext, std::vector<PerceptronStruct>, Cam
 std::vector<PerceptronStruct> perceptronList;
 
 PerceptronStruct* selectedPerceptron;
+int selectedIndex = -1;
 Vector2 tempMouse;
 bool clickOnSelected = false;
 
@@ -169,7 +170,7 @@ bool showCustomGeneration = false;
 bool running = true;
 int frameStart, frameEnd, deltaTime = 0;
 int main(int, char**) {
-	perceptronList.reserve(20);
+	perceptronList.reserve(3);
 
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0) {
         printf("Error: %s\n", SDL_GetError());
@@ -216,6 +217,7 @@ int main(int, char**) {
 			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
 			selectedPerceptron = &perceptronList[perceptronList.size() - 1];
+			selectedIndex = perceptronList.size() - 1;
 		}
 
 		if (ImGui::Button("Generate")) {
@@ -228,36 +230,39 @@ int main(int, char**) {
 			ImGui::Text("(%.1f, %.1f)", selectedPerceptron->visualiser.nodeList[0].position.x, selectedPerceptron->visualiser.nodeList[0].position.y);
 			ImGui::Text("(%.1f, %.1f)", camera.RelativeMouse().x, camera.RelativeMouse().y);
 			ImGui::Text("(%.1f, %.1f)", camera.scale.x, camera.scale.y);
+			if (ImGui::Button("Delete")) { perceptronList.erase(perceptronList.begin() + selectedIndex); selectedPerceptron = nullptr; }
 			ImGui::End();
+		}
 
-			if (clickOnSelected == false) {
-				if (leftButtonDown == true) {
-					
-					for (PerceptronStruct& perceptron : perceptronList) {
-						for (Node& node : perceptron.visualiser.nodeList) {
-							if (camera.RelativeMouse().x < node.position.x + node.radius &&
-								camera.RelativeMouse().x > node.position.x - node.radius &&
-								camera.RelativeMouse().y < node.position.y + node.radius &&
-								camera.RelativeMouse().y > node.position.y - node.radius) {
-								tempMouse = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y);
-								selectedPerceptron = &perceptron;
-								clickOnSelected = true;
-							}
+		if (clickOnSelected == false) {
+			if (leftButtonPress == true) {
+				int x = 0;
+				for (PerceptronStruct& perceptron : perceptronList) {
+					for (Node& node : perceptron.visualiser.nodeList) {
+						if (camera.RelativeMouse().x < node.position.x + node.radius &&
+							camera.RelativeMouse().x > node.position.x - node.radius &&
+							camera.RelativeMouse().y < node.position.y + node.radius &&
+							camera.RelativeMouse().y > node.position.y - node.radius) {
+							tempMouse = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y);
+							selectedPerceptron = &perceptron;
+							selectedIndex = x;
+							clickOnSelected = true;
 						}
 					}
-				}
-				else {
-					clickOnSelected = false;
+					x += 1;
 				}
 			}
+			else {
+				clickOnSelected = false;
+			}
+		}
 
-			if (clickOnSelected == true) {
-				selectedPerceptron->visualiser.position = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse;
-				if (leftButtonDown == false) {
-					selectedPerceptron->visualiser.position = Vector2(0, 0);
-					selectedPerceptron->visualiser.SetPosition(Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse);
-					clickOnSelected = false;
-				}
+		if (clickOnSelected == true) {
+			selectedPerceptron->visualiser.position = Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse;
+			if (leftButtonDown == false) {
+				selectedPerceptron->visualiser.position = Vector2(0, 0);
+				selectedPerceptron->visualiser.SetPosition(Vector2(camera.RelativeMouse().x, camera.RelativeMouse().y) - tempMouse);
+				clickOnSelected = false;
 			}
 		}
 
@@ -278,6 +283,7 @@ int main(int, char**) {
 				perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 				InitializePerceptron(&perceptronList[perceptronList.size() - 1], neuronList);
 				selectedPerceptron = &perceptronList[perceptronList.size() - 1];
+				selectedIndex = perceptronList.size() - 1;
 
 				layerList.clear();
 				neuronList.clear();

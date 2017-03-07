@@ -37,6 +37,7 @@ public:
 	bool Run();
 	double Calculate(double input);
 
+	void FeedLearningRate(double rate);
 	void FeedInput(double input);
 	void Initialize(double input);
 	void Initialize(double input, std::vector<int> weightBias);
