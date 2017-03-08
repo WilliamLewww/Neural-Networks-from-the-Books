@@ -218,6 +218,7 @@ int main(int, char**) {
 		if (ImGui::Button("Generate Example")) {
 			perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 			InitializePerceptron(&perceptronList[perceptronList.size() - 1]);
+			perceptronList[perceptronList.size() - 1].visualiser.SetPositionRelScreen(camera.RelativeMiddleScreen());
 			selectedPerceptron = &perceptronList[perceptronList.size() - 1];
 			selectedIndex = perceptronList.size() - 1;
 		}
@@ -292,6 +293,7 @@ int main(int, char**) {
 			if (ImGui::Button("Create")) {
 				perceptronList.push_back(PerceptronStruct(std::to_string(perceptronList.size())));
 				InitializePerceptron(&perceptronList[perceptronList.size() - 1], neuronList);
+				perceptronList[perceptronList.size() - 1].visualiser.SetPositionRelScreen(camera.RelativeMiddleScreen());
 				selectedPerceptron = &perceptronList[perceptronList.size() - 1];
 				selectedIndex = perceptronList.size() - 1;
 

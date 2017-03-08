@@ -33,7 +33,6 @@ typedef struct PerceptronStruct {
 
 	PerceptronStruct() {}
 	PerceptronStruct(std::string namePara) { name = namePara; }
-	PerceptronStruct(std::string namePara, Vector2 pos) { name = namePara; visualiser.SetPosition(pos); }
 
 	bool initial = false;
 	bool radio = false, rise = true;

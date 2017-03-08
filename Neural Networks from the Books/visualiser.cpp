@@ -119,6 +119,12 @@ void Visualiser::SetPosition(Vector2 pos) {
 	}
 }
 
+void Visualiser::SetPositionRelScreen(Vector2 pos) {
+	for (Node& node : nodeList) {
+		node.position += pos.Get() - Vector2(SCREENWIDTH / 2 - 8, SCREENHEIGHT / 2);
+	}
+}
+
 void Visualiser::LinkNodes() {
 	int iteration = 0;
 	for (int x = 0; x < perceptron->a.size(); x++) {

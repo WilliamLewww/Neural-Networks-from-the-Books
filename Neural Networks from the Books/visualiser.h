@@ -70,6 +70,7 @@ public:
 	bool isLinked = false;
 
 	void SetPosition(Vector2);
+	void SetPositionRelScreen(Vector2);
 	void SetPerceptron(PerceptronML*);
 	void Initialize();
 	void LinkNodes();

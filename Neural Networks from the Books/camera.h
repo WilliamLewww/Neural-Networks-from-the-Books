@@ -15,6 +15,14 @@ struct Camera {
 		);
 	}
 
+	Vector2 RelativeMiddleScreen() {
+		//(mouseX - position.x * (SCREENWIDTH / 2)), 
+		return Vector2(
+			(((SCREENWIDTH / 2) + (SCREENWIDTH / 2) - SCREENWIDTH) / scale.x) - position.x * (SCREENWIDTH / 2) + SCREENWIDTH / 2,
+			(((SCREENHEIGHT / 2) + (SCREENHEIGHT / 2) - SCREENHEIGHT) / scale.y) + position.y * (SCREENHEIGHT / 2) + SCREENHEIGHT / 2
+		);
+	}
+
 	Camera(Vector2 pos, float scaleX, float scaleY) {
 		position = pos;
 		scale = Vector2(scaleX, scaleY);
