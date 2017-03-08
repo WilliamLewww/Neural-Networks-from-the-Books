@@ -4,6 +4,8 @@ std::vector<SDL_Keycode> keyList;
 std::vector<SDL_Keycode> pressKeyList;
 
 bool leftButtonDown, leftButtonPress;
+bool middleMouseDown, middleMousePress;
+bool scrollUp, scrollDown;
 int mouseX, mouseY;
 
 void GetKeys(SDL_Event event) {
@@ -29,11 +31,29 @@ void GetButtons(SDL_Event event) {
 			leftButtonDown = true;
 			leftButtonPress = true;
 		}
+
+		if (event.button.button == SDL_BUTTON_MIDDLE) {
+			middleMouseDown = true;
+			middleMousePress = true;
+		}
+	}
+
+	if (event.type == SDL_MOUSEWHEEL) {
+		if (event.wheel.y > 0) {
+			scrollUp = true;
+		}
+		else {
+			scrollDown = true;
+		}
 	}
 
 	if (event.type == SDL_MOUSEBUTTONUP) {
 		if (event.button.button == SDL_BUTTON_LEFT) {
 			leftButtonDown = false;
+		}
+
+		if (event.button.button == SDL_BUTTON_MIDDLE) {
+			middleMouseDown = false;
 		}
 	}
 

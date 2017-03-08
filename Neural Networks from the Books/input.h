@@ -11,6 +11,8 @@ extern std::vector<SDL_Keycode> pressKeyList;
 
 void GetButtons(SDL_Event event);
 extern bool leftButtonDown, leftButtonPress;
+extern bool middleMouseDown, middleMousePress;
+extern bool scrollUp, scrollDown;
 extern int mouseX, mouseY;
 
 bool CheckMouseOnEntity(Vector2 position, int width, int height);

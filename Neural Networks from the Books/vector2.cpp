@@ -41,6 +41,11 @@ Vector2 Vector2::operator*(Vector2 vector) {
 	return newVector;
 }
 
+Vector2 Vector2::operator/(Vector2 vector) {
+	Vector2 newVector(x /= vector.x, y /= vector.y);
+	return newVector;
+}
+
 Vector2 Vector2::operator*(double value) {
 	Vector2 newVector(x *= value, y *= value);
 	return newVector;

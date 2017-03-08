@@ -155,7 +155,7 @@ std::vector<PerceptronStruct> perceptronList;
 
 PerceptronStruct* selectedPerceptron;
 int selectedIndex = -1;
-Vector2 tempMouse;
+Vector2 tempMouse, tempMouseMiddle = Vector2(0,0);
 bool clickOnSelected = false;
 
 std::vector<const char*> layerList;
@@ -199,6 +199,8 @@ int main(int, char**) {
         SDL_Event event;
 		RemoveInitialPress();
 		leftButtonPress = false;
+		middleMousePress = false;
+		scrollUp = false; scrollDown = false;
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSdl_ProcessEvent(&event);
             if (event.type == SDL_QUIT)
@@ -233,6 +235,14 @@ int main(int, char**) {
 			if (ImGui::Button("Delete")) { perceptronList.erase(perceptronList.begin() + selectedIndex); selectedPerceptron = nullptr; }
 			ImGui::End();
 		}
+
+		if (middleMouseDown) {
+			camera.position += (Vector2(mouseX, mouseY) - tempMouseMiddle.Get()) * Vector2(.002, -.002) / camera.scale;
+		}
+		tempMouseMiddle = Vector2(mouseX, mouseY);
+
+		if (scrollUp == true) { camera.scale += Vector2(.08, .08); }
+		if (scrollDown == true) { camera.scale -= Vector2(.08, .08); }
 
 		if (clickOnSelected == false) {
 			if (leftButtonPress == true) {

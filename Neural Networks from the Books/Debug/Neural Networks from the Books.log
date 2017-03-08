@@ -1,7 +1,6 @@
-﻿  perceptron_struct.cpp
+﻿  main.cpp
 g:\projects\neural networks from the books\neural networks from the books\perceptron_struct.h(41): warning C4305: 'initializing': truncation from 'double' to 'float'
-g:\projects\neural networks from the books\neural networks from the books\perceptron_struct.cpp(65): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-g:\projects\neural networks from the books\neural networks from the books\perceptron_struct.cpp(100): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-g:\projects\neural networks from the books\neural networks from the books\perceptron_struct.cpp(130): warning C4305: 'argument': truncation from 'double' to 'float'
+g:\projects\neural networks from the books\neural networks from the books\main.cpp(334): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+g:\projects\neural networks from the books\neural networks from the books\main.cpp(335): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.exe
   Neural Networks from the Books.vcxproj -> G:\Projects\Neural Networks from the Books\Debug\Neural Networks from the Books.pdb (Partial PDB)
