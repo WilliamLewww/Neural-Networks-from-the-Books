@@ -39,17 +39,23 @@ void PerceptronML::Initialize(double input, std::vector<int> weightBias) {
 	b.clear();
 	a0 = { { input } };
 
-	for (int x = 0; x < weightBias.size(); x++) {
-		if (x == 0) {
-			GenerateWeightBias(1, weightBias[x]);
-		}
-		else {
-			if (x == weightBias.size() - 1) {
-				GenerateWeightBias(weightBias[x - 1], weightBias[x]);
-				GenerateWeightBias(weightBias[x], 1);
+	if (weightBias.size() == 1) {
+		GenerateWeightBias(1, weightBias[0]);
+		GenerateWeightBias(weightBias[0], 1);
+	}
+	else {
+		for (int x = 0; x < weightBias.size(); x++) {
+			if (x == 0) {
+				GenerateWeightBias(1, weightBias[x]);
 			}
 			else {
-				GenerateWeightBias(weightBias[x - 1], weightBias[x]);
+				if (x == weightBias.size() - 1) {
+					GenerateWeightBias(weightBias[x - 1], weightBias[x]);
+					GenerateWeightBias(weightBias[x], 1);
+				}
+				else {
+					GenerateWeightBias(weightBias[x - 1], weightBias[x]);
+				}
 			}
 		}
 	}
@@ -81,7 +87,7 @@ double PerceptronML::Calculate(double input) {
 			tempA = FeedForward(a0, w[x], b[x], 1);
 		}
 		else {
-			tempA = FeedForward(a[x - 1], w[x], b[x], 0);
+			tempA = FeedForward(a[x - 1], w[x], b[x], 1);
 		}
 		a.push_back(tempA);
 	}
@@ -100,7 +106,7 @@ bool PerceptronML::Run() {
 				tempA = FeedForward(a0, w[x], b[x], 1);
 			}
 			else {
-				tempA = FeedForward(a[x - 1], w[x], b[x], 0);
+				tempA = FeedForward(a[x - 1], w[x], b[x], 1);
 			}
 			a.push_back(tempA);
 		}
@@ -117,7 +123,7 @@ bool PerceptronML::Run() {
 				a[x + 1] = FeedForward(a0, w[x], b[x], 1);
 			}
 			else {
-				a[x + 1] = FeedForward(a[x], w[x], b[x], 0);
+				a[x + 1] = FeedForward(a[x], w[x], b[x], 1);
 			}
 		}
 
@@ -170,7 +176,7 @@ void PerceptronML::Backpropagation(double error, std::vector<std::vector<std::ve
 	int y = input.size() - 1;
 	for (int x = w.size() - 1; x >= 0; x--) {
 		if (x == w.size() - 1) {
-			s = {{{ -2 * (DActivation(0, input[y][0][0])) * error }}};
+			s = {{{ -2 * (DActivation(1, input[y][0][0])) * error }}};
 		}
 		else {
 			//std::cout << MultMatrix(GenJacobianMatrix(input[x + 1], 1), MultMatrix(FlipMatrix(w[x + 1]), s[s.size() - 1])).size() << ":" << 
